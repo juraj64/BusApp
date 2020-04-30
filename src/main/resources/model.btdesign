@@ -1,0 +1,90 @@
+Application BusApp {
+    basePackage=com.jurajlazovy
+
+    Module web {
+
+        Resource FrontResource {
+            String front return="front/overview";
+        }
+
+        Resource DriverResource {
+            scaffold
+        }
+
+        Resource BusResource {
+            scaffold
+        }
+
+        Resource SeatResource {
+            scaffold
+        }
+
+        Resource BusConnectionResource {
+            scaffold
+        }
+
+    }
+
+    Module bus {
+
+        Entity Driver {
+            scaffold
+            String name
+            int age
+            -List<@BusConnection> connections <-> driver inverse;
+         }
+
+        Entity Bus {
+            scaffold
+            int busNum key;
+            String busSpz;
+            int numberOfSeats;
+        }
+
+
+        Entity Seat {
+            scaffold
+            int seatNo;
+            -@SeatStatus seatStatus nullable;
+            Date reservationDate;
+            String reservationKey;
+            -@BusConnection direction <-> seats cascade="persist,merge";
+        }
+
+        enum SeatStatus {
+        Free, Reserved, Paid;
+        }
+
+        Entity BusConnection {
+            scaffold
+            String destination
+            int minSeats
+            int durationMinutes
+            - @Driver driver <-> connections cascade="persist,merge"
+            - @Bus bus
+            - List<@Seat> seats <-> direction inverse
+        }
+
+        Service BusConnectionService {
+        // Najdi volny autobus a najdi volneho vodica tak ze
+        // - Autobus nemoze byt na inej linke
+        // - Vodic moze robit max 12 hodin potom musi 12 hodin oddychovat
+        // - Vodic musi mat oddych od predchadzajuceho spoja minimalne 10 minut
+        // - Treba vyrobit aj Seats v pocte Bus.numberOfSeats
+        makeConnection(String destination, int minSeats, int durationMinutes);
+
+        // Rezervuj sedadlo, ak je obsadene (Paid) alebo bolo rezervovane pred menej ako 10 minutami vyhod exception SeatAlreadyReserved
+        // To znamena ak je sice rezervovane ale dlhsie ako 10 minut vygeneruj novy kluc a urob novu rezervaciu
+        // Ak je mozne rezervovat sedadlo vygeneruj 8 miestne cislo ktore nemoze zacinat 0 a vrat ako navratovu hodnotu - key
+        String reserveSeat(int seatNum) throws SeatAlreadyReserved;
+
+        // Potvrd rezervaciu po zaplateni
+        // Ak je sedadlo Free tak rezervuj rovno bez kontroly kluca
+        // Ak je rezervovane skontroluj kluc, ak sedi kluc daj do stavu Paid inac vrat chybu WrongKey
+        String confirmSeat(int seatNum, String reservationKey) throws WrongKey; // vyhadzuje chybu key
+
+        // Prescanuje vsetky sedadla vsetkych autobusov a ak je rezervacia starsia ako 10 minut tak ju zrusi
+        freeReservedSeats();
+        }
+    }
+}

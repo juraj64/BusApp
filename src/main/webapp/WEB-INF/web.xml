@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app version="3.0" xmlns="http://java.sun.com/xml/ns/javaee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd">
+
+<display-name>BusApp</display-name>
+<description>BusApp</description>
+
+<context-param>
+	<param-name>webAppRootKey</param-name>
+	<param-value>rest.root</param-value>
+</context-param>
+
+<context-param>
+	<param-name>contextConfigLocation</param-name>
+	<param-value>classpath:applicationContext.xml</param-value>
+</context-param>
+
+<listener>
+	<listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
+</listener>
+
+<servlet>
+	<servlet-name>rest</servlet-name>
+	<servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
+	<load-on-startup>2</load-on-startup>
+</servlet>
+
+<servlet-mapping>
+	<servlet-name>rest</servlet-name>
+	<url-pattern>/rest/*</url-pattern>
+</servlet-mapping>
+
+<!-- TODO OpenEntityManagerInViewFilter -->
+
+<filter>
+	<filter-name>httpMethodFilter</filter-name>
+	<filter-class>org.springframework.web.filter.HiddenHttpMethodFilter</filter-class>
+</filter>
+
+<filter-mapping>
+	<filter-name>httpMethodFilter</filter-name>
+	<servlet-name>rest</servlet-name>
+</filter-mapping>
+
+<filter>
+	<filter-name>ServiceContextFilter</filter-name>
+	<filter-class>org.sculptor.framework.context.ServiceContextServletFilter</filter-class>
+	<init-param>
+		<param-name>ServiceContextFactoryImplementationClassName</param-name>
+		<param-value>org.sculptor.framework.context.ServletContainerServiceContextFactory</param-value>
+	</init-param>
+</filter>
+
+<filter-mapping>
+	<filter-name>ServiceContextFilter</filter-name>
+	<servlet-name>rest</servlet-name>
+</filter-mapping>	
+
+<welcome-file-list>
+	<!-- Redirects for dispatcher handling -->
+	<welcome-file>index.jsp</welcome-file>
+</welcome-file-list>
+
+<error-page>
+	<exception-type>java.lang.Exception</exception-type>
+	<!-- Displays a stack trace -->
+	<location>/WEB-INF/jsp/uncaughtException.jsp</location>
+</error-page>
+
+<resource-ref>
+	<res-ref-name>jdbc/applicationDS</res-ref-name>
+    <res-type>javax.sql.DataSource</res-type>
+    <res-auth>Container</res-auth>
+</resource-ref>
+
+</web-app>	

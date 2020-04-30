@@ -1,0 +1,14 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<dataset>
+	<BUS
+			id="1" busNum="10" busSpz="BB-123" numberOfSeats="20"
+			CREATEDDATE="2006-12-08" CREATEDBY="dbunit"
+			LASTUPDATED="2006-12-08" LASTUPDATEDBY="dbunit" version="1"  />
+	<BUS
+			id="2" busNum="20" busSpz="BA-456" numberOfSeats="40"
+			CREATEDDATE="2006-12-08" CREATEDBY="dbunit"
+			LASTUPDATED="2006-12-08" LASTUPDATEDBY="dbunit" version="1"  />
+	<DRIVER /> 
+	<BUSCONNECTION /> 
+	<SEAT /> 
+</dataset>
