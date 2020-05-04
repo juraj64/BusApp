@@ -86,7 +86,7 @@ Application BusApp {
         // Potvrd rezervaciu po zaplateni
         // Ak je sedadlo Free tak rezervuj rovno bez kontroly kluca
         // Ak je rezervovane skontroluj kluc, ak sedi kluc daj do stavu Paid inac vrat chybu WrongKey
-        String confirmSeat(int seatNum, String reservationKey) throws WrongKey;
+        String confirmSeat(BusConnection direction, int seatNum, String reservationKey) throws WrongKey;
         }
     }
 }

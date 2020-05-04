@@ -18,7 +18,9 @@ public interface SeatService {
 
 	public String reserveSeat(ServiceContext ctx, BusConnection direction, int seatNum) throws SeatAlreadyReserved;
 
-	public String confirmSeat(ServiceContext ctx, int seatNum, String reservationKey) throws WrongKey;
+	public Seat findSeatBySeatNo(ServiceContext ctx, BusConnection direction, int seatNum);
+
+	public String confirmSeat(ServiceContext ctx, BusConnection direction, int seatNum, String reservationKey) throws WrongKey;
 
 	public Seat findById(ServiceContext ctx, Long id) throws SeatNotFoundException;
 

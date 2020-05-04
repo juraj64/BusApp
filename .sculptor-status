@@ -1,5 +1,5 @@
 #Sculptor created the following 89 files
-#Thu Apr 30 17:33:40 CEST 2020
+#Mon May 04 13:00:19 CEST 2020
 src/generated/java/com/jurajlazovy/bus/domain/DriverProperties.java=372cba373c710b7ffb077286d8cd240b
 src/generated/java/com/jurajlazovy/bus/repositoryimpl/BusConnectionRepositoryImpl.java=22a8c6bfea1ce52d9d55023079a196fe
 src/generated/resources/generated-spring.properties=34497b0acda1fddeada5859707dc0721
@@ -74,7 +74,7 @@ src/generated/resources/META-INF/persistence.xml=22194b49accbcd0057b2b53c09e14df
 src/main/webapp/WEB-INF/jsp/driver/create.jsp=a8e6d3becb96b7c15b4461def90b4537
 src/generated/java/com/jurajlazovy/bus/domain/SeatBuilder.java=57b16197f4a34cefe69e8992a0551913
 src/main/java/com/jurajlazovy/web/rest/BusResource.java=728d55c5fe029490cd4219f485159bf0
-src/generated/java/com/jurajlazovy/bus/serviceapi/SeatService.java=8bc333af12cdb9ea904029e0c0a82aac
+src/generated/java/com/jurajlazovy/bus/serviceapi/SeatService.java=7b03228f0c15e2b45d78294b3ec08055
 src/generated/java/com/jurajlazovy/bus/serviceapi/BusService.java=49be035d5222d8059d9f4bf3aa829242
 src/main/webapp/WEB-INF/jsp/header.jsp=917c3d5a1deb6e1d3c81a6dc992ce014
 src/generated/java/com/jurajlazovy/bus/domain/BusConnectionProperties.java=ed99c94e92c28a906e7b8ad4970a9070

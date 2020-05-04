@@ -143,20 +143,24 @@ public class SeatServiceTest extends AbstractDbUnitJpaTests implements SeatServi
 
 	@Test
 	public void reserveSeat() throws Exception {
-		List<BusConnection> myConnections = busConnectionService.findAll(getServiceContext());
-		for(BusConnection connection : myConnections) {
-			for(int i=0; i< connection.getSeats().size(); i++) {
-				seatService.reserveSeat(getServiceContext(), connection, connection.getSeats().get(i).getSeatNo());
-			}
-		}
-//		BusConnection direction = busConnectionService.findById(getServiceContext(), 2L);
-//		seatService.reserveSeat(getServiceContext(), direction, 5);
+//		List<BusConnection> myConnections = busConnectionService.findAll(getServiceContext());
+//		for(BusConnection connection : myConnections) {
+//			for(int i=0; i< connection.getSeats().size(); i++) {
+//				seatService.reserveSeat(getServiceContext(), connection, connection.getSeats().get(i).getSeatNo());
+//			}
+//		}
+		BusConnection direction = busConnectionService.findById(getServiceContext(), 3L);
+		seatService.reserveSeat(getServiceContext(), direction, 11);
 
 	}
 
 
 	@Test
 	public void confirmSeat() throws Exception {
+        BusConnection direction = busConnectionService.findById(getServiceContext(), 2L);
+        String myKey = seatService.reserveSeat(getServiceContext(),direction, 5);
+		System.out.println("Confirmation after reservation");
+		seatService.confirmSeat(getServiceContext(), direction, 5, myKey);
 
 	}
 }
