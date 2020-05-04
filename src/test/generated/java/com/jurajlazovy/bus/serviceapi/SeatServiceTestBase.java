@@ -5,6 +5,10 @@ package com.jurajlazovy.bus.serviceapi;
  */
 public interface SeatServiceTestBase {
 
+	public void testReserveSeat() throws Exception;
+
+	public void testConfirmSeat() throws Exception;
+
 	public void testFindById() throws Exception;
 
 	public void testFindAll() throws Exception;

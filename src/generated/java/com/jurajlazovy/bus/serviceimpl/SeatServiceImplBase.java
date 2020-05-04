@@ -7,15 +7,20 @@ import com.jurajlazovy.bus.serviceapi.SeatService;
 import java.util.List;
 import org.sculptor.framework.context.ServiceContext;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
 
 /**
- * Implementation of SeatService.
+ * Generated base class for implementation of SeatService.
+ * <p>
+ * Make sure that subclass defines the following annotations:
+ * 
+ * <pre>
+ * @org.springframework.stereotype.Service("seatService")
+ * </pre>
+ *
  */
-@Service("seatService")
-public class SeatServiceImpl implements SeatService {
+public abstract class SeatServiceImplBase implements SeatService {
 
-	public SeatServiceImpl() {
+	public SeatServiceImplBase() {
 	}
 
 	@Autowired

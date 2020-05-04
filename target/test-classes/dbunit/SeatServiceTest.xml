@@ -1,15 +1,15 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <dataset>
 	<BUS
-			id="1" busNum="10" busSpz="BB-123" numberOfSeats="20"
+			id="1" busNum="10" busSpz="BB-123" numberOfSeats="2"
 			CREATEDDATE="2006-12-08" CREATEDBY="dbunit"
 			LASTUPDATED="2006-12-08" LASTUPDATEDBY="dbunit" version="1"  />
 	<BUS
-			id="2" busNum="20" busSpz="BA-456" numberOfSeats="40"
+			id="2" busNum="20" busSpz="BA-456" numberOfSeats="2"
 			CREATEDDATE="2006-12-08" CREATEDBY="dbunit"
 			LASTUPDATED="2006-12-08" LASTUPDATEDBY="dbunit" version="1"  />
 	<BUS
-			id="3" busNum="30" busSpz="NR-111" numberOfSeats="24"
+			id="3" busNum="30" busSpz="NR-111" numberOfSeats="3"
 			CREATEDDATE="2006-12-08" CREATEDBY="dbunit"
 			LASTUPDATED="2006-12-08" LASTUPDATEDBY="dbunit" version="1"  />
 	<BUS
@@ -23,6 +23,15 @@
 	<DRIVER id="2" name="Juro" age="55"
 			CREATEDDATE="2006-12-08" CREATEDBY="dbunit"
 			LASTUPDATED="2006-12-08" LASTUPDATEDBY="dbunit" version="1" UUID="UUID-2"/>
+	<DRIVER id="3" name="Palo" age="48"
+			CREATEDDATE="2006-12-08" CREATEDBY="dbunit"
+			LASTUPDATED="2006-12-08" LASTUPDATEDBY="dbunit" version="1" UUID="UUID-3"/>
+	<DRIVER id="4" name="Marek" age="45"
+			CREATEDDATE="2006-12-08" CREATEDBY="dbunit"
+			LASTUPDATED="2006-12-08" LASTUPDATEDBY="dbunit" version="1" UUID="UUID-4"/>
+	<DRIVER id="5" name="Roman" age="46"
+			CREATEDDATE="2006-12-08" CREATEDBY="dbunit"
+			LASTUPDATED="2006-12-08" LASTUPDATEDBY="dbunit" version="1" UUID="UUID-5"/>
 
 	<BUSCONNECTION
 			id="1" destination="PP" minSeats="10" durationMinutes="210" driver="1" bus="1"
@@ -33,26 +42,22 @@
 			CREATEDDATE="2006-12-08" CREATEDBY="dbunit"
 			LASTUPDATED="2006-12-08" LASTUPDATEDBY="dbunit" version="1" UUID="UUID-2" />
 	<BUSCONNECTION
-			id="3" destination="NR" minSeats="24" durationMinutes="70" driver="2" bus="3"
+			id="3" destination="NR" minSeats="24" durationMinutes="70" driver="3" bus="3"
 			CREATEDDATE="2006-12-08" CREATEDBY="dbunit"
 			LASTUPDATED="2006-12-08" LASTUPDATEDBY="dbunit" version="1" UUID="UUID-3" />
-	<BUSCONNECTION
-			id="4" destination="TT" minSeats="24" durationMinutes="40" driver="1" bus="4"
-			CREATEDDATE="2006-12-08" CREATEDBY="dbunit"
-			LASTUPDATED="2006-12-08" LASTUPDATEDBY="dbunit" version="1" UUID="UUID-4" />
 
 	<SEAT
-			id="1" seatNo="10" seatStatus="Free" reservationDate="2020-04-21 17:56:27" reservationKey="free"
+			id="1" seatNo="10" seatStatus="Free" reservationDate="2020-05-01 17:56:27" reservationKey="free"
 			direction="1"
 			CREATEDDATE="2006-12-08" CREATEDBY="dbunit"
 			LASTUPDATED="2006-12-08" LASTUPDATEDBY="dbunit" version="1" UUID="UUID-1"/>
 	<SEAT
-			id="2" seatNo="11" seatStatus="Reserved" reservationDate="2020-04-18 06:12:00" reservationKey="reserved"
+			id="2" seatNo="11" seatStatus="Reserved" reservationDate="2020-05-01 06:12:00" reservationKey="reserved"
 			direction="1"
 			CREATEDDATE="2006-12-08" CREATEDBY="dbunit"
 			LASTUPDATED="2006-12-08" LASTUPDATEDBY="dbunit" version="1" UUID="UUID-2"/>
 	<SEAT
-			id="3" seatNo="5" seatStatus="Paid" reservationDate="2020-04-20 16:12:00" reservationKey="reserved"
+			id="3" seatNo="5" seatStatus="Paid" reservationDate="2020-04-20 16:12:00" reservationKey="paid"
 			direction="2"
 			CREATEDDATE="2006-12-08" CREATEDBY="dbunit"
 			LASTUPDATED="2006-12-08" LASTUPDATEDBY="dbunit" version="1" UUID="UUID-3"/>
@@ -61,5 +66,20 @@
 			direction="2"
 			CREATEDDATE="2006-12-08" CREATEDBY="dbunit"
 			LASTUPDATED="2006-12-08" LASTUPDATEDBY="dbunit" version="1" UUID="UUID-4"/>
+	<SEAT
+			id="5" seatNo="10" seatStatus="Reserved" reservationDate="2020-04-20 16:12:00" reservationKey="reserved"
+			direction="3"
+			CREATEDDATE="2006-12-08" CREATEDBY="dbunit"
+			LASTUPDATED="2006-12-08" LASTUPDATEDBY="dbunit" version="1" UUID="UUID-5"/>
+	<SEAT
+			id="6" seatNo="11" seatStatus="Reserved" reservationDate="2020-04-29 16:12:00" reservationKey="reserved"
+			direction="3"
+			CREATEDDATE="2006-12-08" CREATEDBY="dbunit"
+			LASTUPDATED="2006-12-08" LASTUPDATEDBY="dbunit" version="1" UUID="UUID-6"/>
+	<SEAT
+			id="7" seatNo="12" seatStatus="Reserved" reservationDate="2020-04-30 06:00:00" reservationKey="reserved"
+			direction="3"
+			CREATEDDATE="2006-12-08" CREATEDBY="dbunit"
+			LASTUPDATED="2006-12-08" LASTUPDATEDBY="dbunit" version="1" UUID="UUID-7"/>
 
 </dataset>

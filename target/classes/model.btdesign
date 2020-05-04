@@ -73,18 +73,20 @@ Application BusApp {
         // - Treba vyrobit aj Seats v pocte Bus.numberOfSeats
         makeConnection(String destination, int minSeats, int durationMinutes);
 
+        // Prescanuje vsetky sedadla vsetkych autobusov a ak je rezervacia starsia ako 10 minut tak ju zrusi
+        freeReservedSeats();
+        }
+
+        Service SeatService {
         // Rezervuj sedadlo, ak je obsadene (Paid) alebo bolo rezervovane pred menej ako 10 minutami vyhod exception SeatAlreadyReserved
         // To znamena ak je sice rezervovane ale dlhsie ako 10 minut vygeneruj novy kluc a urob novu rezervaciu
         // Ak je mozne rezervovat sedadlo vygeneruj 8 miestne cislo ktore nemoze zacinat 0 a vrat ako navratovu hodnotu - key
-        String reserveSeat(int seatNum) throws SeatAlreadyReserved;
+        String reserveSeat(BusConnection direction, int seatNum) throws SeatAlreadyReserved;
 
         // Potvrd rezervaciu po zaplateni
         // Ak je sedadlo Free tak rezervuj rovno bez kontroly kluca
         // Ak je rezervovane skontroluj kluc, ak sedi kluc daj do stavu Paid inac vrat chybu WrongKey
-        String confirmSeat(int seatNum, String reservationKey) throws WrongKey; // vyhadzuje chybu key
-
-        // Prescanuje vsetky sedadla vsetkych autobusov a ak je rezervacia starsia ako 10 minut tak ju zrusi
-        freeReservedSeats();
+        String confirmSeat(int seatNum, String reservationKey) throws WrongKey;
         }
     }
 }

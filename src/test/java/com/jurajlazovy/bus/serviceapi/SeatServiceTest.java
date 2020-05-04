@@ -29,6 +29,16 @@ public class SeatServiceTest extends AbstractDbUnitJpaTests implements SeatServi
 	@Autowired
 	protected BusConnectionService busConnectionService;
 
+	@Override
+	public void testReserveSeat() throws Exception {
+
+	}
+
+	@Override
+	public void testConfirmSeat() throws Exception {
+
+	}
+
 	@Test
 	public void testFindById() throws Exception {
 		Seat seat = seatService.findById(getServiceContext(),3L);
@@ -129,5 +139,24 @@ public class SeatServiceTest extends AbstractDbUnitJpaTests implements SeatServi
 			exception = true;
 		}
 		assertTrue(exception);
+	}
+
+	@Test
+	public void reserveSeat() throws Exception {
+		List<BusConnection> myConnections = busConnectionService.findAll(getServiceContext());
+		for(BusConnection connection : myConnections) {
+			for(int i=0; i< connection.getSeats().size(); i++) {
+				seatService.reserveSeat(getServiceContext(), connection, connection.getSeats().get(i).getSeatNo());
+			}
+		}
+//		BusConnection direction = busConnectionService.findById(getServiceContext(), 2L);
+//		seatService.reserveSeat(getServiceContext(), direction, 5);
+
+	}
+
+
+	@Test
+	public void confirmSeat() throws Exception {
+
 	}
 }

@@ -86,17 +86,6 @@ public class BusConnectionServiceTest extends AbstractDbUnitJpaTests implements 
 		busConnectionService.makeConnection(getServiceContext(),"Trnava", 20,40);
 	}
 
-	@Test
-	public void testReserveSeat() throws Exception {
-		//BusConnection direction = busConnectionService.findById(getServiceContext(),1L);
-		busConnectionService.reserveSeat(getServiceContext(),12);
-
-	}
-
-	@Test
-	public void testConfirmSeat() throws Exception {
-
-	}
 
 	@Test
 	public void testFreeReservedSeats() throws Exception {

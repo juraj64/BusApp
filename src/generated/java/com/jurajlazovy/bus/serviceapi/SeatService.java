@@ -1,9 +1,13 @@
 package com.jurajlazovy.bus.serviceapi;
 
+import com.jurajlazovy.bus.domain.BusConnection;
 import com.jurajlazovy.bus.domain.Seat;
+import com.jurajlazovy.bus.exception.SeatAlreadyReserved;
 import com.jurajlazovy.bus.exception.SeatNotFoundException;
-import java.util.List;
+import com.jurajlazovy.bus.exception.WrongKey;
 import org.sculptor.framework.context.ServiceContext;
+
+import java.util.List;
 
 /**
  * Generated interface for the Service SeatService.
@@ -11,6 +15,10 @@ import org.sculptor.framework.context.ServiceContext;
 public interface SeatService {
 
 	public final static String BEAN_ID = "seatService";
+
+	public String reserveSeat(ServiceContext ctx, BusConnection direction, int seatNum) throws SeatAlreadyReserved;
+
+	public String confirmSeat(ServiceContext ctx, int seatNum, String reservationKey) throws WrongKey;
 
 	public Seat findById(ServiceContext ctx, Long id) throws SeatNotFoundException;
 

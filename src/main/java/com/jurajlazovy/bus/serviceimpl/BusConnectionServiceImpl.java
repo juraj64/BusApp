@@ -1,8 +1,6 @@
 package com.jurajlazovy.bus.serviceimpl;
 
 import com.jurajlazovy.bus.domain.*;
-import com.jurajlazovy.bus.exception.SeatAlreadyReserved;
-import com.jurajlazovy.bus.exception.WrongKey;
 import org.sculptor.framework.context.ServiceContext;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -80,34 +78,9 @@ public class BusConnectionServiceImpl extends BusConnectionServiceImplBase {
 		System.out.println("   Number of seats: " + newConnection.getBus().getNumberOfSeats());
 	}
 
-	// Rezervuj sedadlo, ak je obsadene (Paid) alebo bolo rezervovane pred menej ako 10 minutami
-	// vyhod exception SeatAlreadyReserved
-	// To znamena ak je sice rezervovane ale dlhsie ako 10 minut vygeneruj novy kluc a urob novu rezervaciu
-	// Ak je mozne rezervovat sedadlo vygeneruj 8 miestne cislo ktore nemoze zacinat 0
-	// a vrat ako navratovu hodnotu - key
-	public String reserveSeat(ServiceContext ctx, int seatNum) throws SeatAlreadyReserved {
-		Seat mySeat = new Seat();
-		List<Seat> allSeats = seatRepository.findAll();
-		for(Seat seat : allSeats) {
-			if(seat.getSeatNo() == seatNum) {
-				mySeat = seat;
-				break;
-			}
-		}
-		System.out.println("ReservationKey = " + mySeat.getReservationKey());
-		return mySeat.getReservationKey();
-	}
-
-	// Potvrd rezervaciu po zaplateni
-	// Ak je sedadlo Free tak rezervuj rovno bez kontroly kluca
-	// Ak je rezervovane skontroluj kluc, ak sedi kluc daj do stavu Paid inac vrat chybu WrongKey
-	public String confirmSeat(ServiceContext ctx, int seatNum, String reservationKey) throws WrongKey {
-		return null;
-	}
-
 
 	// Prescanuje vsetky sedadla vsetkych autobusov a ak je rezervacia starsia ako 10 minut tak ju zrusi
-	// Ke??e mi z tabu?ky berie iba dátum a nie ?as, dal som rezerváciu star?iu ako 24 hod.
+	// Kedze mi z tabulky berie iba dátum a nie cas, dal som rezerváciu starsiu ako 24 hod.
 	public void freeReservedSeats(ServiceContext ctx) {
 		Date actualTime = new Date(); //aktualny cas
 		//LocalDateTime actualTime = LocalDateTime.now(); //alternatíva s LocalDateTime vyhadzuje chyby
@@ -116,7 +89,7 @@ public class BusConnectionServiceImpl extends BusConnectionServiceImplBase {
 		for(BusConnection connection : allConnections) {
 			for(int i=0; i< connection.getBus().getNumberOfSeats(); i++) {
 				if(connection.getSeats().get(i).getSeatStatus() == SeatStatus.Reserved) {
-					Date reservationDate = connection.getSeats().get(i).getReservationDate(); // na?íta iba dátum, ?as nevie
+					Date reservationDate = connection.getSeats().get(i).getReservationDate(); // nacíta iba dátum, cas nevie
 					long diffMillies = Math.abs(actualTime.getTime() - reservationDate.getTime());
 					long diffHours = TimeUnit.HOURS.convert(diffMillies, TimeUnit.MILLISECONDS);
 					System.out.println("DiffHours = " + diffHours);
