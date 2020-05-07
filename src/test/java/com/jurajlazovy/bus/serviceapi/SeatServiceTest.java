@@ -3,7 +3,9 @@ package com.jurajlazovy.bus.serviceapi;
 import com.jurajlazovy.bus.domain.BusConnection;
 import com.jurajlazovy.bus.domain.Seat;
 import com.jurajlazovy.bus.domain.SeatStatus;
+import com.jurajlazovy.bus.exception.SeatAlreadyReserved;
 import com.jurajlazovy.bus.exception.SeatNotFoundException;
+import org.junit.Assert;
 import org.junit.Test;
 import org.sculptor.framework.test.AbstractDbUnitJpaTests;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -143,14 +145,20 @@ public class SeatServiceTest extends AbstractDbUnitJpaTests implements SeatServi
 
 	@Test
 	public void reserveSeat() throws Exception {
-//		List<BusConnection> myConnections = busConnectionService.findAll(getServiceContext());
-//		for(BusConnection connection : myConnections) {
-//			for(int i=0; i< connection.getSeats().size(); i++) {
-//				seatService.reserveSeat(getServiceContext(), connection, connection.getSeats().get(i).getSeatNo());
-//			}
-//		}
-		BusConnection direction = busConnectionService.findById(getServiceContext(), 3L);
-		seatService.reserveSeat(getServiceContext(), direction, 11);
+		List<BusConnection> myConnections = busConnectionService.findAll(getServiceContext());
+		for(BusConnection connection : myConnections) {
+            String key = seatService.reserveSeat(getServiceContext(), connection, connection.getSeats().get(0).getSeatNo());
+            Assert.assertTrue(key != null);
+            try {
+                seatService.reserveSeat(getServiceContext(), connection, connection.getSeats().get(1).getSeatNo());
+                Assert.fail();
+            } catch (SeatAlreadyReserved sr) {
+                Assert.assertTrue(sr != null);
+            }
+		}
+
+		//		BusConnection direction = busConnectionService.findById(getServiceContext(), 3L);
+//		seatService.reserveSeat(getServiceContext(), direction, 11);
 
 	}
 

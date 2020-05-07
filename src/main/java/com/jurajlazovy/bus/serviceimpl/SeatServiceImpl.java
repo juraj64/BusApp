@@ -48,7 +48,7 @@ public class SeatServiceImpl extends SeatServiceImplBase {
 				(mySeat.getSeatStatus() == SeatStatus.Reserved && diffHours < 24)) {
 			System.out.println("This seat is already reserved (not relevant for confirmation)");
 			// neviem ako s tymto exceptionom, Palo
-			//throw new SeatAlreadyReserved("SeatAlreadyReserved with ReservationKey = " + mySeat.getReservationKey());
+			throw new SeatAlreadyReserved("SeatAlreadyReserved with ReservationKey = " + mySeat.getReservationKey());
 		} else { // ak free, alebo rezervacia vyprsala
 			mySeat.setSeatStatus(SeatStatus.Reserved);
 			mySeat.setReservationDate(actualTime);

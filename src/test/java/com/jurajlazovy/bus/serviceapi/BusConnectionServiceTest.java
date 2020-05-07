@@ -34,7 +34,7 @@ public class BusConnectionServiceTest extends AbstractDbUnitJpaTests implements 
 	public void testFindAll() throws Exception {
 		List<BusConnection> myDirections = busConnectionService.findAll(getServiceContext());
 		assertEquals(10, myDirections.get(0).getMinSeats());
-		assertEquals(4, myDirections.size());
+		assertEquals(3, myDirections.size());
 
 	}
 
