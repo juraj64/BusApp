@@ -84,12 +84,19 @@ public class BusConnectionServiceTest extends AbstractDbUnitJpaTests implements 
 	@Test
 	public void testMakeConnection() throws Exception {
 		busConnectionService.makeConnection(getServiceContext(),"Trnava", 20,40);
+//		List<BusConnection> myDirections = busConnectionService.findAll(getServiceContext());
+//		assertEquals(4, myDirections.size());
 	}
 
 
 	@Test
 	public void testFreeReservedSeats() throws Exception {
+		BusConnection direction = busConnectionService.findById(getServiceContext(),3L);
 		busConnectionService.freeReservedSeats(getServiceContext());
+		//BusConnection direction = busConnectionService.findById(getServiceContext(),3L); moze byt aj za metodou
+		assertEquals(SeatStatus.Free, direction.getSeats().get(0).getSeatStatus());
+		assertEquals(SeatStatus.Reserved, direction.getSeats().get(1).getSeatStatus()); // pozor na cas rezervacie (10 min)
+		assertEquals(SeatStatus.Free, direction.getSeats().get(2).getSeatStatus());
 
 	}
 

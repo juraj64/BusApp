@@ -78,31 +78,39 @@ public class BusConnectionServiceImpl extends BusConnectionServiceImplBase {
 		System.out.println("   Number of seats: " + newConnection.getBus().getNumberOfSeats());
 	}
 
+	// celkove pocet minut, ktore denne odjazdi konkretny driver
+	public int driverOccupation (Driver driver) {
+		List<BusConnection> allConnections = busConnectionRepository.findAll();
+		int totalDuration = 0;
+		for (BusConnection connection : allConnections) {
+			if(connection.getDriver() == driver) {
+				totalDuration += connection.getDurationMinutes();
+			}
+		}
+		return totalDuration;
+	}
 
 	// Prescanuje vsetky sedadla vsetkych autobusov a ak je rezervacia starsia ako 10 minut tak ju zrusi
-	// Kedze mi z tabulky berie iba dátum a nie cas, dal som rezerváciu starsiu ako 24 hod.
 	public void freeReservedSeats(ServiceContext ctx) {
 		Date actualTime = new Date(); //aktualny cas
-		//LocalDateTime actualTime = LocalDateTime.now(); //alternatíva s LocalDateTime vyhadzuje chyby
-
 		List<BusConnection> allConnections = busConnectionRepository.findAll();
+
 		for(BusConnection connection : allConnections) {
 			for(int i=0; i< connection.getBus().getNumberOfSeats(); i++) {
+
 				if(connection.getSeats().get(i).getSeatStatus() == SeatStatus.Reserved) {
-					Date reservationDate = connection.getSeats().get(i).getReservationDate(); // nacíta iba dátum, cas nevie
+					Date reservationDate = connection.getSeats().get(i).getReservationDate();
 					long diffMillies = Math.abs(actualTime.getTime() - reservationDate.getTime());
-					long diffHours = TimeUnit.HOURS.convert(diffMillies, TimeUnit.MILLISECONDS);
-					System.out.println("DiffHours = " + diffHours);
-//					LocalDateTime ldt = LocalDateTime.ofInstant(reservationDate.toInstant(), ZoneId.systemDefault());
-//					Duration duration = Duration.between(actualTime, ldt);
-//					long diffMinutes = Math.abs(duration.toMinutes());
-					if(diffHours > 24) {
+					long diffMinutes = TimeUnit.MINUTES.convert(diffMillies, TimeUnit.MILLISECONDS);
+					System.out.println("DiffMinutes = " + diffMinutes); // standardne to tam nemusi byt
+
+					if(diffMinutes > 10) {
 						connection.getSeats().get(i).setSeatStatus(SeatStatus.Free);
 					}
 				}
 			}
 		}
-		// výstup
+		// výstup (standardne to tam nemusi byt)
 		for(BusConnection connection : allConnections) {
 			System.out.println("BusConnection: " + connection.getDestination());
 			for(int i=0; i< connection.getBus().getNumberOfSeats(); i++) {
