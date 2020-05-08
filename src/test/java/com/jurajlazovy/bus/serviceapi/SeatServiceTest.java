@@ -5,7 +5,7 @@ import com.jurajlazovy.bus.domain.Seat;
 import com.jurajlazovy.bus.domain.SeatStatus;
 import com.jurajlazovy.bus.exception.SeatAlreadyReserved;
 import com.jurajlazovy.bus.exception.SeatNotFoundException;
-import org.junit.Assert;
+import com.jurajlazovy.bus.exception.WrongKey;
 import org.junit.Test;
 import org.sculptor.framework.test.AbstractDbUnitJpaTests;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -145,30 +145,67 @@ public class SeatServiceTest extends AbstractDbUnitJpaTests implements SeatServi
 
 	@Test
 	public void reserveSeat() throws Exception {
-		List<BusConnection> myConnections = busConnectionService.findAll(getServiceContext());
-		for(BusConnection connection : myConnections) {
-            String key = seatService.reserveSeat(getServiceContext(), connection, connection.getSeats().get(0).getSeatNo());
-            Assert.assertTrue(key != null);
-            try {
-                seatService.reserveSeat(getServiceContext(), connection, connection.getSeats().get(1).getSeatNo());
-                Assert.fail();
-            } catch (SeatAlreadyReserved sr) {
-                Assert.assertTrue(sr != null);
-            }
+		// free seat, vygeneruje reservation key
+		BusConnection direction1 = busConnectionService.findById(getServiceContext(), 1L);
+		String reservationKey1 = seatService.reserveSeat(getServiceContext(), direction1, 10);
+		assertNotNull(reservationKey1);
+
+		// reserved seat, rezervácia vypršala, vygeneruje novy reservation key
+		BusConnection direction2 = busConnectionService.findById(getServiceContext(), 3L);
+		String reservationKey2 = seatService.reserveSeat(getServiceContext(), direction2, 12);
+		//System.out.println("reservationKey2 = " + reservationKey2);
+		assertNotEquals("12121212", reservationKey2);
+
+		// paid seat, negeneruje kluc
+		BusConnection direction3 = busConnectionService.findById(getServiceContext(), 2L);
+		try {
+			seatService.reserveSeat(getServiceContext(), direction3, 5);
+			fail();
+		} catch (SeatAlreadyReserved sr) {
+			assertNotNull(sr);
 		}
 
-		//		BusConnection direction = busConnectionService.findById(getServiceContext(), 3L);
-//		seatService.reserveSeat(getServiceContext(), direction, 11);
+		// reserved seat, negeneruje kluc (pri testovani aktualizovat cas rezervacie, aby bol v limite 10 min.)
+		BusConnection direction4 = busConnectionService.findById(getServiceContext(), 3L);
+		try {
+			seatService.reserveSeat(getServiceContext(), direction4, 11);
+			fail();
+		} catch (SeatAlreadyReserved sr) {
+			assertNotNull(sr);
+		}
 
 	}
 
 
 	@Test
 	public void confirmSeat() throws Exception {
-        BusConnection direction = busConnectionService.findById(getServiceContext(), 2L);
-        String myKey = seatService.reserveSeat(getServiceContext(),direction, 5);
-		System.out.println("Confirmation after reservation");
-		seatService.confirmSeat(getServiceContext(), direction, 5, myKey);
+		// free seat, po zaplateni do stavu paid a vrati confirmed
+		BusConnection direction1 = busConnectionService.findById(getServiceContext(), 1L);
+		String result1 = seatService.confirmSeat(getServiceContext(), direction1, 10, "null");
+		assertEquals("confirmed", result1);
+
+		// reserved seat, po zaplateni do stavu paid a vrati confirmed
+		BusConnection direction2 = busConnectionService.findById(getServiceContext(), 3L);
+		String result2 = seatService.confirmSeat(getServiceContext(), direction2, 12, "12121212");
+		assertEquals("confirmed", result2);
+
+		// reserved seat, zly reservationKey
+		BusConnection direction3 = busConnectionService.findById(getServiceContext(), 3L);
+		try {
+			seatService.confirmSeat(getServiceContext(), direction3, 12, "1212");
+			fail();
+		} catch (WrongKey wk) {
+			assertNotNull(wk);
+		}
+
+		// paid uz rezervovany seat
+		BusConnection direction4 = busConnectionService.findById(getServiceContext(), 2L);
+		try {
+			seatService.confirmSeat(getServiceContext(), direction4, 5,"55555555");
+			fail();
+		} catch (WrongKey wk) {
+			assertNotNull(wk);
+		}
 
 	}
 }

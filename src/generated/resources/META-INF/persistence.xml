@@ -6,7 +6,6 @@
 	<persistence-unit name="BusAppEntityManagerFactory" transaction-type="RESOURCE_LOCAL">
 		<description>JPA configuration for BusApp </description>
 		<provider>org.hibernate.ejb.HibernatePersistence</provider>
-		<non-jta-data-source>java:comp/env/jdbc/applicationDS</non-jta-data-source>
 		<!-- annotated classes -->
 		<class>com.jurajlazovy.bus.domain.Bus</class>
 		<class>com.jurajlazovy.bus.domain.BusConnection</class>
@@ -17,11 +16,9 @@
 	    <validation-mode>AUTO</validation-mode>
 		<!-- properties -->
 		<properties>
-			<property name="hibernate.dialect" value="org.sculptor.framework.persistence.CustomHSQLDialect" />
+			<property name="hibernate.dialect" value="org.hibernate.dialect.MySQLDialect" />
 			<property name="query.substitutions" value="true 1, false 0" />
 			
-			<property name="hibernate.show_sql" value="true" />
-			<property name="hibernate.hbm2ddl.auto" value="create-drop" />
 			<property name="hibernate.cache.use_query_cache" value="true"/>
 			<property name="hibernate.cache.use_second_level_cache" value="true"/>
 			<property name="hibernate.cache.region_prefix" value=""/>

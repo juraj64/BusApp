@@ -36,7 +36,7 @@ Application BusApp {
 
         Entity Bus {
             scaffold
-            int busNum key;
+            int busNum key changeable;
             String busSpz;
             int numberOfSeats;
         }
@@ -46,7 +46,7 @@ Application BusApp {
             scaffold
             int seatNo;
             -@SeatStatus seatStatus nullable;
-            Date reservationDate;
+            Timestamp reservationDate;
             String reservationKey;
             -@BusConnection direction <-> seats cascade="persist,merge";
         }

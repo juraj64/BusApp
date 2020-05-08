@@ -1,4 +1,4 @@
-C:\Users\Lazovy\Documents\Java\142-Sculptor-BusApp-v3.0\src\generated\java\com\jurajlazovy\bus\serviceimpl\SeatServiceImpl.java
+C:\Users\Lazovy\Documents\Java\142-Sculptor-BusApp-v3.0\src\main\java\com\jurajlazovy\bus\serviceimpl\SeatServiceImpl.java
 C:\Users\Lazovy\Documents\Java\142-Sculptor-BusApp-v3.0\src\generated\java\com\jurajlazovy\web\rest\BusResourceBase.java
 C:\Users\Lazovy\Documents\Java\142-Sculptor-BusApp-v3.0\src\generated\java\com\jurajlazovy\bus\exception\BusNotFoundException.java
 C:\Users\Lazovy\Documents\Java\142-Sculptor-BusApp-v3.0\src\main\java\com\jurajlazovy\web\rest\DriverResource.java
@@ -33,11 +33,13 @@ C:\Users\Lazovy\Documents\Java\142-Sculptor-BusApp-v3.0\src\main\java\com\jurajl
 C:\Users\Lazovy\Documents\Java\142-Sculptor-BusApp-v3.0\src\main\java\com\jurajlazovy\web\rest\FrontResource.java
 C:\Users\Lazovy\Documents\Java\142-Sculptor-BusApp-v3.0\src\generated\java\com\jurajlazovy\bus\domain\Driver.java
 C:\Users\Lazovy\Documents\Java\142-Sculptor-BusApp-v3.0\src\generated\java\com\jurajlazovy\bus\domain\BusConnectionBuilder.java
+C:\Users\Lazovy\Documents\Java\142-Sculptor-BusApp-v3.0\src\generated\java\com\jurajlazovy\bus\exception\WrongKey.java
 C:\Users\Lazovy\Documents\Java\142-Sculptor-BusApp-v3.0\src\generated\java\com\jurajlazovy\bus\domain\BusProperties.java
 C:\Users\Lazovy\Documents\Java\142-Sculptor-BusApp-v3.0\src\generated\java\com\jurajlazovy\bus\exception\DriverNotFoundException.java
 C:\Users\Lazovy\Documents\Java\142-Sculptor-BusApp-v3.0\src\generated\java\com\jurajlazovy\web\rest\BusConnectionResourceBase.java
 C:\Users\Lazovy\Documents\Java\142-Sculptor-BusApp-v3.0\src\main\java\com\jurajlazovy\web\rest\BusResource.java
 C:\Users\Lazovy\Documents\Java\142-Sculptor-BusApp-v3.0\src\generated\java\com\jurajlazovy\bus\domain\SeatProperties.java
+C:\Users\Lazovy\Documents\Java\142-Sculptor-BusApp-v3.0\src\generated\java\com\jurajlazovy\bus\serviceimpl\SeatServiceImplBase.java
 C:\Users\Lazovy\Documents\Java\142-Sculptor-BusApp-v3.0\src\generated\java\com\jurajlazovy\bus\repositoryimpl\BusRepositoryImpl.java
 C:\Users\Lazovy\Documents\Java\142-Sculptor-BusApp-v3.0\src\generated\java\com\jurajlazovy\web\rest\SeatResourceBase.java
 C:\Users\Lazovy\Documents\Java\142-Sculptor-BusApp-v3.0\src\generated\java\com\jurajlazovy\bus\serviceapi\BusConnectionService.java

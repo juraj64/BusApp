@@ -47,7 +47,7 @@ public class Seat extends AbstractDomainObject implements Auditable, Identifiabl
 	@Column(name = "SEATNO", nullable = false)
 	private int seatNo;
 	@Column(name = "RESERVATIONDATE", nullable = false)
-	@Type(type = "date")
+	@Type(type = "timestamp")
 	@NotNull
 	private Date reservationDate;
 	@Column(name = "RESERVATIONKEY", nullable = false, length = 100)

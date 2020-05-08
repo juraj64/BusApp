@@ -32,7 +32,8 @@ public class BusServiceTest extends AbstractDbUnitJpaTests implements BusService
 
 	@Test
 	public void testSave() throws Exception {
-		Bus bus = new Bus();
+		Bus bus = new Bus(99);
+		//Bus bus = new Bus();
 		bus.setBusSpz("BL-147");
 		bus.setNumberOfSeats(20);
 		Bus newBus = busService.save(getServiceContext(),bus);

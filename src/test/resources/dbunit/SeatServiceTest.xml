@@ -57,7 +57,7 @@
 			CREATEDDATE="2006-12-08" CREATEDBY="dbunit"
 			LASTUPDATED="2006-12-08" LASTUPDATEDBY="dbunit" version="1" UUID="UUID-2"/>
 	<SEAT
-			id="3" seatNo="5" seatStatus="Paid" reservationDate="2020-04-20 16:12:00" reservationKey="null"
+			id="3" seatNo="5" seatStatus="Paid" reservationDate="2020-04-20 16:12:00" reservationKey="55555555"
 			direction="2"
 			CREATEDDATE="2006-12-08" CREATEDBY="dbunit"
 			LASTUPDATED="2006-12-08" LASTUPDATEDBY="dbunit" version="1" UUID="UUID-3"/>
@@ -72,12 +72,12 @@
 			CREATEDDATE="2006-12-08" CREATEDBY="dbunit"
 			LASTUPDATED="2006-12-08" LASTUPDATEDBY="dbunit" version="1" UUID="UUID-5"/>
 	<SEAT
-			id="6" seatNo="11" seatStatus="Reserved" reservationDate="2020-04-29 16:12:00" reservationKey="null"
+			id="6" seatNo="11" seatStatus="Reserved" reservationDate="2020-05-07 16:30:00" reservationKey="11111111"
 			direction="3"
 			CREATEDDATE="2006-12-08" CREATEDBY="dbunit"
 			LASTUPDATED="2006-12-08" LASTUPDATEDBY="dbunit" version="1" UUID="UUID-6"/>
 	<SEAT
-			id="7" seatNo="12" seatStatus="Reserved" reservationDate="2020-04-30 06:00:00" reservationKey="null"
+			id="7" seatNo="12" seatStatus="Reserved" reservationDate="2020-04-30 06:00:00" reservationKey="12121212"
 			direction="3"
 			CREATEDDATE="2006-12-08" CREATEDBY="dbunit"
 			LASTUPDATED="2006-12-08" LASTUPDATEDBY="dbunit" version="1" UUID="UUID-7"/>

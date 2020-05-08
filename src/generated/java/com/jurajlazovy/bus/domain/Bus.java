@@ -53,7 +53,7 @@ public class Bus extends AbstractDomainObject implements Auditable, Identifiable
 	@Column(name = "VERSION", nullable = false)
 	private Long version;
 
-	public Bus() {
+	protected Bus() {
 	}
 
 	public Bus(int busNum) {
