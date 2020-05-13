@@ -36,7 +36,7 @@ Application BusApp {
 
         Entity Bus {
             scaffold
-            int busNum key changeable;
+            int busNum; // verzia bez key
             String busSpz;
             int numberOfSeats;
         }

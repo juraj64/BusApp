@@ -1,12 +1,14 @@
 package com.jurajlazovy.bus.domain;
 
 import java.util.Date;
+import java.util.UUID;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EntityListeners;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.PrePersist;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -32,13 +34,15 @@ public class Bus extends AbstractDomainObject implements Auditable, Identifiable
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	@Column(name = "ID")
 	private Long id;
-	@Column(name = "BUSNUM", nullable = false, unique = true)
+	@Column(name = "BUSNUM", nullable = false)
 	private int busNum;
 	@Column(name = "BUSSPZ", nullable = false, length = 100)
 	@NotNull
 	private String busSpz;
 	@Column(name = "NUMBEROFSEATS", nullable = false)
 	private int numberOfSeats;
+	@Column(name = "UUID", nullable = false, length = 36, unique = true)
+	private String uuid;
 	@Temporal(TemporalType.TIMESTAMP)
 	@Column(name = "CREATEDDATE")
 	private Date createdDate;
@@ -53,12 +57,7 @@ public class Bus extends AbstractDomainObject implements Auditable, Identifiable
 	@Column(name = "VERSION", nullable = false)
 	private Long version;
 
-	protected Bus() {
-	}
-
-	public Bus(int busNum) {
-		super();
-		this.busNum = busNum;
+	public Bus() {
 	}
 
 	public Long getId() {
@@ -77,6 +76,11 @@ public class Bus extends AbstractDomainObject implements Auditable, Identifiable
 
 	public int getBusNum() {
 		return busNum;
+	}
+
+	public void setBusNum(int busNum) {
+		this.busNum = busNum;
+
 	}
 
 	public String getBusSpz() {
@@ -143,12 +147,29 @@ public class Bus extends AbstractDomainObject implements Auditable, Identifiable
 	}
 
 	/**
+	 * This domain object doesn't have a natural key and this random generated identifier is the unique identifier for this domain
+	 * object.
+	 */
+	public String getUuid() {
+		// lazy init of UUID
+		if (uuid == null) {
+			uuid = UUID.randomUUID().toString();
+		}
+		return uuid;
+	}
+
+	@PrePersist
+	protected void prePersist() {
+		getUuid();
+	}
+
+	/**
 	 * This method is used by equals and hashCode.
 	 * 
-	 * @return {@link #getBusNum}
+	 * @return {{@link #getUuid}
 	 */
 	public Object getKey() {
-		return getBusNum();
+		return getUuid();
 	}
 
 }

@@ -1,5 +1,5 @@
 #Sculptor created the following 88 files
-#Tue May 12 18:03:11 CEST 2020
+#Wed May 13 16:40:54 CEST 2020
 src/generated/java/com/jurajlazovy/bus/domain/DriverProperties.java=372cba373c710b7ffb077286d8cd240b
 src/generated/java/com/jurajlazovy/bus/repositoryimpl/BusConnectionRepositoryImpl.java=22a8c6bfea1ce52d9d55023079a196fe
 src/generated/resources/generated-spring.properties=47d8a389910c0dfbce2e584e5df9fd5d
@@ -31,7 +31,7 @@ src/main/webapp/WEB-INF/jetty-env.xml=24881d142dc2b217c6d702c3038c2b6c
 src/generated/java/com/jurajlazovy/bus/domain/BusConnection.java=6dbc3968c3bee10c902217dab5b09757
 src/test/generated/java/com/jurajlazovy/bus/serviceapi/BusConnectionServiceTestBase.java=e5ef8a7d07b2d5cdcc083a8f2e4b4736
 src/test/generated/java/com/jurajlazovy/bus/serviceapi/SeatServiceTestBase.java=00ccb7a662c2ad7e31bca32e7e803a1d
-src/generated/java/com/jurajlazovy/bus/domain/BusBuilder.java=3a3cbe1beab751f67a36d10303ffd18e
+src/generated/java/com/jurajlazovy/bus/domain/BusBuilder.java=8ef8160f78d3160fe4b1e9099ce210d0
 src/generated/java/com/jurajlazovy/bus/exception/SeatNotFoundException.java=18531f91f19da017373512ecd0b2b0d7
 src/test/resources/spring-test.properties=b630de33662844f11c811c9d9f08dd49
 src/generated/java/com/jurajlazovy/bus/repositoryimpl/BusRepositoryImpl.java=896c13931c59995e31475c08dc994e53
@@ -41,7 +41,7 @@ src/generated/java/com/jurajlazovy/bus/repositoryimpl/DriverRepositoryImpl.java=
 src/generated/resources/pub-sub.xml=20f31012dbc564ec6d63e4c226fa09e2
 src/generated/java/com/jurajlazovy/bus/domain/BusRepository.java=c074d4ac0c7fd40d702add90c5a23a94
 src/test/generated/resources/EntityManagerFactory-test.xml=2ae8f3344ead637e77492c8c43f2a957
-src/generated/java/com/jurajlazovy/bus/domain/Bus.java=3e3195d1a577e2bc5dd042a058b62132
+src/generated/java/com/jurajlazovy/bus/domain/Bus.java=44610be26b590608e922522c82223086
 src/generated/java/com/jurajlazovy/bus/serviceapi/DriverService.java=18289a9c21c030316926ff1d9aed90e4
 src/generated/java/com/jurajlazovy/bus/domain/BusConnectionRepository.java=78a665d818cb170e911e20bfb7c6485a
 src/generated/java/com/jurajlazovy/bus/exception/SeatAlreadyReserved.java=f13135256ec7eddcdfd16a94290c0051
@@ -68,7 +68,7 @@ src/test/generated/resources/META-INF/persistence-test.xml=e828716be48cd55776ba5
 src/test/generated/java/com/jurajlazovy/bus/serviceapi/DriverServiceTestBase.java=6cf0004f5d4828c9ef71b0a8ac61668f
 src/generated/java/com/jurajlazovy/bus/exception/WrongKey.java=3269e62bdd3c82807fbc8543383601c9
 src/generated/java/com/jurajlazovy/bus/exception/DriverNotFoundException.java=2e20754e2b05138cd6712c2581eaf257
-src/generated/java/com/jurajlazovy/bus/domain/BusProperties.java=7c49778afc2bddb0869aff63679a2ce6
+src/generated/java/com/jurajlazovy/bus/domain/BusProperties.java=e0b7bb3b7ab6883f5d3bbad12044f05e
 src/main/webapp/WEB-INF/jsp/uncaughtException.jsp=2d9d51eb675ce07480c4ed871d5eb46b
 src/generated/resources/META-INF/persistence.xml=a89e2b30db27826d047f731696d45912
 src/main/webapp/WEB-INF/jsp/driver/create.jsp=a8e6d3becb96b7c15b4461def90b4537
@@ -81,7 +81,7 @@ src/generated/java/com/jurajlazovy/bus/serviceimpl/SeatServiceImplBase.java=b5f9
 src/test/generated/resources/applicationContext-test.xml=71d165aa0eaec464bdd1e046a69e87b7
 src/generated/java/com/jurajlazovy/bus/serviceimpl/BusServiceImpl.java=766cd7c053e7aa190e952c9e1a907911
 src/main/resources/more.xml=c397f379d4a9f7e62db909bf19878183
-src/generated/resources/dbschema/BusApp_ddl.sql=86809ee245e38ef5ea00c045688cd31d
+src/generated/resources/dbschema/BusApp_ddl.sql=bcabed2a9b1a11a2f82f4a64182aa3cd
 src/generated/java/com/jurajlazovy/bus/repositoryimpl/SeatRepositoryImpl.java=2b4d157efc0680bb84e23d1edc585e77
 src/main/webapp/WEB-INF/jsp/driver/show.jsp=0d04be0af3ab4361f22e405cf455623e
 src/main/webapp/WEB-INF/jsp/busConnection/showlist.jsp=b0b12ee928db1b7e9b3d163dbae57c39

@@ -32,8 +32,8 @@ public class BusServiceTest extends AbstractDbUnitJpaTests implements BusService
 
 	@Test
 	public void testSave() throws Exception {
-		Bus bus = new Bus(99);
-		//Bus bus = new Bus();
+		//Bus bus = new Bus(99);
+		Bus bus = new Bus();
 		bus.setBusSpz("BL-147");
 		bus.setNumberOfSeats(20);
 		Bus newBus = busService.save(getServiceContext(),bus);
@@ -41,14 +41,15 @@ public class BusServiceTest extends AbstractDbUnitJpaTests implements BusService
 
 	}
 
-	@Test
+	@Test // ide deletnut len bus, ktory nie je v žiadnej busConnection. Inak vyhadzuje chybu.
+	// Predtým keď bol busNum key, tak to problém nebol
 	public void testDelete() throws Exception {
-		Bus bus = busService.findById(getServiceContext(), 2L);
+		Bus bus = busService.findById(getServiceContext(), 4L);
 		busService.delete(getServiceContext(),bus);
 
 		boolean exception = false;
 		try {
-			Bus delBus = busService.findById(getServiceContext(), 2L);
+			Bus delBus = busService.findById(getServiceContext(), 4L);
 			fail();
 		} catch (BusNotFoundException bdnfe) {
 			exception = true;

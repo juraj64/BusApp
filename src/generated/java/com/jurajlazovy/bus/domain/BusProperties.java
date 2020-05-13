@@ -34,6 +34,10 @@ public class BusProperties {
 		return sharedInstance.numberOfSeats();
 	}
 
+	public static Property<Bus> uuid() {
+		return sharedInstance.uuid();
+	}
+
 	public static Property<Bus> createdDate() {
 		return sharedInstance.createdDate();
 	}
@@ -93,6 +97,10 @@ public class BusProperties {
 
 		public Property<T> numberOfSeats() {
 			return new LeafProperty<T>(getParentPath(), "numberOfSeats", false, owningClass);
+		}
+
+		public Property<T> uuid() {
+			return new LeafProperty<T>(getParentPath(), "uuid", false, owningClass);
 		}
 
 		public Property<T> createdDate() {

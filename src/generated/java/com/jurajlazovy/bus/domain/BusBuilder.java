@@ -26,12 +26,6 @@ public class BusBuilder {
 	public BusBuilder() {
 	}
 
-	public BusBuilder(int busNum) {
-
-		this.busNum = busNum;
-
-	}
-
 	public BusBuilder busNum(int val) {
 		this.busNum = val;
 		return this;
@@ -99,7 +93,8 @@ public class BusBuilder {
 	 * @return new Bus instance constructed based on the values that have been set into this builder
 	 */
 	public Bus build() {
-		Bus obj = new Bus(getBusNum());
+		Bus obj = new Bus();
+		obj.setBusNum(busNum);
 		obj.setBusSpz(busSpz);
 		obj.setNumberOfSeats(numberOfSeats);
 		obj.setCreatedDate(createdDate);
