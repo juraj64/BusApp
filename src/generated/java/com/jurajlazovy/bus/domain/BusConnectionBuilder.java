@@ -15,6 +15,8 @@ public class BusConnectionBuilder {
 
 	private String destination;
 	private int minSeats;
+	private int startHours;
+	private int startMinutes;
 	private int durationMinutes;
 	private Date createdDate;
 	private String createdBy;
@@ -43,6 +45,16 @@ public class BusConnectionBuilder {
 
 	public BusConnectionBuilder minSeats(int val) {
 		this.minSeats = val;
+		return this;
+	}
+
+	public BusConnectionBuilder startHours(int val) {
+		this.startHours = val;
+		return this;
+	}
+
+	public BusConnectionBuilder startMinutes(int val) {
+		this.startMinutes = val;
 		return this;
 	}
 
@@ -97,6 +109,14 @@ public class BusConnectionBuilder {
 		return minSeats;
 	}
 
+	public int getStartHours() {
+		return startHours;
+	}
+
+	public int getStartMinutes() {
+		return startMinutes;
+	}
+
 	public int getDurationMinutes() {
 		return durationMinutes;
 	}
@@ -136,6 +156,8 @@ public class BusConnectionBuilder {
 		BusConnection obj = new BusConnection();
 		obj.setDestination(destination);
 		obj.setMinSeats(minSeats);
+		obj.setStartHours(startHours);
+		obj.setStartMinutes(startMinutes);
 		obj.setDurationMinutes(durationMinutes);
 		obj.setCreatedDate(createdDate);
 		obj.setCreatedBy(createdBy);

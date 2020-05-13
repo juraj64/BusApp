@@ -34,15 +34,18 @@
 			LASTUPDATED="2006-12-08" LASTUPDATEDBY="dbunit" version="1" UUID="UUID-5"/>
 
 	<BUSCONNECTION
-			id="1" destination="PP" minSeats="10" durationMinutes="210" driver="1" bus="1"
+			id="1" destination="PP" minSeats="10" startHours="8" startMinutes="25" durationMinutes="280"
+			driver="1" bus="1"
 			CREATEDDATE="2006-12-08" CREATEDBY="dbunit"
 			LASTUPDATED="2006-12-08" LASTUPDATEDBY="dbunit" version="1" UUID="UUID-1" />
 	<BUSCONNECTION
-			id="2" destination="BB" minSeats="20" durationMinutes="120" driver="2" bus="2"
+			id="2" destination="BB" minSeats="20" startHours="10" startMinutes="00" durationMinutes="140"
+			driver="2" bus="2"
 			CREATEDDATE="2006-12-08" CREATEDBY="dbunit"
 			LASTUPDATED="2006-12-08" LASTUPDATEDBY="dbunit" version="1" UUID="UUID-2" />
 	<BUSCONNECTION
-			id="3" destination="NR" minSeats="24" durationMinutes="70" driver="3" bus="3"
+			id="3" destination="NR" minSeats="24" startHours="12" startMinutes="50" durationMinutes="70"
+			driver="3" bus="3"
 			CREATEDDATE="2006-12-08" CREATEDBY="dbunit"
 			LASTUPDATED="2006-12-08" LASTUPDATEDBY="dbunit" version="1" UUID="UUID-3" />
 
@@ -72,7 +75,7 @@
 			CREATEDDATE="2006-12-08" CREATEDBY="dbunit"
 			LASTUPDATED="2006-12-08" LASTUPDATEDBY="dbunit" version="1" UUID="UUID-5"/>
 	<SEAT
-			id="6" seatNo="11" seatStatus="Reserved" reservationDate="2020-05-08 10:39:00" reservationKey="11111111"
+			id="6" seatNo="11" seatStatus="Reserved" reservationDate="2020-05-12 14:40:00" reservationKey="11111111"
 			direction="3"
 			CREATEDDATE="2006-12-08" CREATEDBY="dbunit"
 			LASTUPDATED="2006-12-08" LASTUPDATEDBY="dbunit" version="1" UUID="UUID-6"/>

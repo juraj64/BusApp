@@ -12,6 +12,16 @@
 			<div class="box" id="_minSeats">${result.minSeats}</div>
 		</div>
 		<br/>
+		<div id="busConnection_startHours">
+			<label for="_startHours">StartHours:</label>
+			<div class="box" id="_startHours">${result.startHours}</div>
+		</div>
+		<br/>
+		<div id="busConnection_startMinutes">
+			<label for="_startMinutes">StartMinutes:</label>
+			<div class="box" id="_startMinutes">${result.startMinutes}</div>
+		</div>
+		<br/>
 		<div id="busConnection_durationMinutes">
 			<label for="_durationMinutes">DurationMinutes:</label>
 			<div class="box" id="_durationMinutes">${result.durationMinutes}</div>

@@ -35,6 +35,14 @@ public class BusConnectionProperties {
 		return sharedInstance.minSeats();
 	}
 
+	public static Property<BusConnection> startHours() {
+		return sharedInstance.startHours();
+	}
+
+	public static Property<BusConnection> startMinutes() {
+		return sharedInstance.startMinutes();
+	}
+
 	public static Property<BusConnection> durationMinutes() {
 		return sharedInstance.durationMinutes();
 	}
@@ -110,6 +118,14 @@ public class BusConnectionProperties {
 
 		public Property<T> minSeats() {
 			return new LeafProperty<T>(getParentPath(), "minSeats", false, owningClass);
+		}
+
+		public Property<T> startHours() {
+			return new LeafProperty<T>(getParentPath(), "startHours", false, owningClass);
+		}
+
+		public Property<T> startMinutes() {
+			return new LeafProperty<T>(getParentPath(), "startMinutes", false, owningClass);
 		}
 
 		public Property<T> durationMinutes() {

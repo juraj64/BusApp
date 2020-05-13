@@ -10,6 +10,8 @@
 		<th>Id</th>
 		<th>Destination</th>
 		<th>MinSeats</th>
+		<th>StartHours</th>
+		<th>StartMinutes</th>
 		<th>DurationMinutes</th>
 		<th/>
 		<th/>
@@ -24,6 +26,12 @@
 				</td>
 				<td>
 					${each.minSeats}
+				</td>
+				<td>
+					${each.startHours}
+				</td>
+				<td>
+					${each.startMinutes}
 				</td>
 				<td>
 					${each.durationMinutes}

@@ -49,6 +49,10 @@ public class BusConnection extends AbstractDomainObject implements Auditable, Id
 	private String destination;
 	@Column(name = "MINSEATS", nullable = false)
 	private int minSeats;
+	@Column(name = "STARTHOURS", nullable = false)
+	private int startHours;
+	@Column(name = "STARTMINUTES", nullable = false)
+	private int startMinutes;
 	@Column(name = "DURATIONMINUTES", nullable = false)
 	private int durationMinutes;
 	@Column(name = "UUID", nullable = false, length = 36, unique = true)
@@ -113,6 +117,24 @@ public class BusConnection extends AbstractDomainObject implements Auditable, Id
 
 	public void setMinSeats(int minSeats) {
 		this.minSeats = minSeats;
+
+	}
+
+	public int getStartHours() {
+		return startHours;
+	}
+
+	public void setStartHours(int startHours) {
+		this.startHours = startHours;
+
+	}
+
+	public int getStartMinutes() {
+		return startMinutes;
+	}
+
+	public void setStartMinutes(int startMinutes) {
+		this.startMinutes = startMinutes;
 
 	}
 

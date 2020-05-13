@@ -59,6 +59,8 @@ Application BusApp {
             scaffold
             String destination
             int minSeats
+            int startHours
+            int startMinutes
             int durationMinutes
             - @Driver driver <-> connections cascade="persist,merge"
             - @Bus bus
@@ -71,7 +73,7 @@ Application BusApp {
         // - Vodic moze robit max 12 hodin potom musi 12 hodin oddychovat
         // - Vodic musi mat oddych od predchadzajuceho spoja minimalne 10 minut
         // - Treba vyrobit aj Seats v pocte Bus.numberOfSeats
-        makeConnection(String destination, int minSeats, int durationMinutes);
+        makeConnection(String destination, int minSeats, int startHours, int startMinutes,  int durationMinutes);
 
         // Prescanuje vsetky sedadla vsetkych autobusov a ak je rezervacia starsia ako 10 minut tak ju zrusi
         freeReservedSeats();

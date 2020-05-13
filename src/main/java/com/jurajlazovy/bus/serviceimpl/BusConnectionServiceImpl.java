@@ -32,43 +32,78 @@ public class BusConnectionServiceImpl extends BusConnectionServiceImplBase {
 	// - Vodic moze robit max 12 hodin potom musi 12 hodin oddychovat
 	// - Vodic musi mat oddych od predchadzajuceho spoja minimalne 10 minut
 	// - Treba vyrobit aj Seats v pocte Bus.numberOfSeats
-	public void makeConnection(ServiceContext ctx, String destination, int minSeats, int durationMinutes) {
+	public void makeConnection(ServiceContext ctx, String destination, int minSeats,
+							   int startHours, int startMinutes, int durationMinutes) {
 		System.out.println("Make new connection for destination " + destination);
-		// najdenie volneho busu a drivera
-		List<Bus> freeBuses = busRepository.findAll(); // vsetky busy
-		List<Driver> freeDrivers = driverRepository.findAll(); // vsetci driveri
 		List<BusConnection> allConnections = busConnectionRepository.findAll();
+		// najdenie volneho busu
+		List<Bus> freeBuses = busRepository.findAll(); // vsetky busy
 		for (BusConnection connection : allConnections) {
 			Bus reservedBus = connection.getBus();
 			freeBuses.remove(reservedBus);
-			Driver reservedDriver = connection.getDriver();
-			freeDrivers.remove(reservedDriver);
-			}
-		System.out.println("There are " + freeDrivers.size() + " vacant drivers.");
-		for(Driver driver : freeDrivers) {
-			System.out.println("   Driver`s name: " + driver.getName());
 		}
 
-		System.out.println("There are " + freeBuses.size() + " non-occupied buses.");
+		if (freeBuses.isEmpty()) {
+			System.out.println("There is no free bus to make new connection");
+			return;
+		}
+
+		System.out.println("There are " + freeBuses.size() + " non-occupied bus(es).");
 		for(Bus bus : freeBuses) {
 			System.out.println("   Bus`s ID number: " + bus.getBusSpz());
 		}
 
-		Bus myBus = freeBuses.get(0); // vyberieme prvy dostupny bus. Alternatívne ho vyberie user
-		Driver myDriver = freeDrivers.get(0);  // a drivera
+		// najdenie volneho drivera
+		int startTime = startHours * 60 + startMinutes;
+		int finishTime = startTime + durationMinutes;
+		List<Driver> freeDrivers = driverRepository.findAll(); // vsetci driveri
+		// treba ist takto cez connections, lebo cez driverov to vyhadzuje chyby
+		for (BusConnection connection : allConnections) {
+			Driver driver = connection.getDriver();
+			boolean driverCurrentOccupation = true;
+			int connectionStart = connection.getStartHours() * 60 + connection.getStartMinutes();
+			int connectionFinish =  connectionStart + connection.getDurationMinutes();
+			if ((connectionFinish+10) < startTime || finishTime < (connectionStart-10)) { // 10 min. pred a po volno
+				driverCurrentOccupation = false; // driver je volny
+			}
 
-		BusConnection newConnection = new BusConnection(); // vytvorim new connection
-		newConnection.setDestination(destination);
-		newConnection.setMinSeats(minSeats);
-		newConnection.setDurationMinutes(durationMinutes);
-		newConnection.setBus(myBus);
-		newConnection.setDriver(myDriver);
+			if (driverDailyOccupation(driver) >= 720 || driverCurrentOccupation) { // ak plati jedno alebo druhe, driver nie je volny
+				freeDrivers.remove(driver);
+			}
+		}
+
+		if (freeDrivers.isEmpty()) {
+			System.out.println("There is no free driver to make new connection");
+			return;
+		}
+
+		System.out.println("There are " + freeDrivers.size() + " vacant driver(s).");
+		for(Driver driver : freeDrivers) {
+			System.out.println("   Driver`s name: " + driver.getName());
+		}
+
+		Bus myBus = freeBuses.get(0); // vyberieme prvy dostupny bus. Alternatívne ho vyberie user
+		Driver myDriver = freeDrivers.get(0);  // a drivera (alebo toho, co ma najmenej najazdene)
+
+		Date actualTime = new Date();
+		BusConnection connection = new BusConnection(); // vytvorim new connection
+		connection.setDestination(destination);
+		connection.setMinSeats(minSeats);
+		connection.setStartHours(startHours);
+		connection.setStartMinutes(startMinutes);
+		connection.setDurationMinutes(durationMinutes);
+		connection.setBus(myBus);
+		connection.setDriver(myDriver);
 		for (int i = 0; i < myBus.getNumberOfSeats(); i++) {
 			Seat seat = new Seat();
 			seat.setSeatNo(i+1);
 			seat.setSeatStatus(SeatStatus.Free);
-			newConnection.addSeat(seat);
+			seat.setReservationDate(actualTime);
+			seat.setReservationKey("null");
+			connection.addSeat(seat);
 		}
+		BusConnection newConnection = busConnectionRepository.save(connection);
+
 		System.out.println("-----------------------");
 		System.out.println("We created new connection ");
 		System.out.println("-----------------------");
@@ -78,14 +113,13 @@ public class BusConnectionServiceImpl extends BusConnectionServiceImplBase {
 		System.out.println("   Number of seats: " + newConnection.getBus().getNumberOfSeats());
 	}
 
-	// celkove pocet minut, ktore denne odjazdi konkretny driver
-	public int driverOccupation (Driver driver) {
-		List<BusConnection> allConnections = busConnectionRepository.findAll();
+	// celkovy pocet minut, ktory denne odjazdi konkretny driver
+	public int driverDailyOccupation (Driver driver) {
 		int totalDuration = 0;
-		for (BusConnection connection : allConnections) {
-			if(connection.getDriver() == driver) {
-				totalDuration += connection.getDurationMinutes();
-			}
+
+		for (int i=0; i < driver.getConnections().size(); i++) {
+			BusConnection connection = driver.getConnections().get(i);
+			totalDuration += connection.getDurationMinutes();
 		}
 		return totalDuration;
 	}

@@ -16,6 +16,18 @@
 		<br/>
 		<form:errors cssClass="errors" id="_minSeats" path="minSeats"/>
 	</div>
+	<div id="busConnection_startHours">
+		<label for="_startHours">StartHours:</label>
+		<form:input cssStyle="width:300px" id="_startHours" path="startHours"/>
+		<br/>
+		<form:errors cssClass="errors" id="_startHours" path="startHours"/>
+	</div>
+	<div id="busConnection_startMinutes">
+		<label for="_startMinutes">StartMinutes:</label>
+		<form:input cssStyle="width:300px" id="_startMinutes" path="startMinutes"/>
+		<br/>
+		<form:errors cssClass="errors" id="_startMinutes" path="startMinutes"/>
+	</div>
 	<div id="busConnection_durationMinutes">
 		<label for="_durationMinutes">DurationMinutes:</label>
 		<form:input cssStyle="width:300px" id="_durationMinutes" path="durationMinutes"/>

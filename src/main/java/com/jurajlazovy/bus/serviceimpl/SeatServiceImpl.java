@@ -36,7 +36,13 @@ public class SeatServiceImpl extends SeatServiceImplBase {
 	// Ak je mozne rezervovat sedadlo vygeneruj 8 miestne cislo ktore nemoze zacinat 0 a vrat ako navratovu hodnotu - key
 	public String reserveSeat(ServiceContext ctx, BusConnection direction, int seatNum) throws SeatAlreadyReserved {
 		// find Seat by seatNum
-		Seat mySeat = findSeatBySeatNo(ctx, direction, seatNum);
+		Seat mySeat = new Seat();
+		try {
+			mySeat = findSeatBySeatNo(ctx, direction, seatNum);
+		} catch (Exception exception) {
+			System.out.println("There is no seat with this seat number");
+			return "null";
+		}
 
 		// rezervacia, ak nie je paid, alebo rezervovane kratsie ako 10 min.
 		Date actualTime = new Date(); //aktualny cas
@@ -57,16 +63,14 @@ public class SeatServiceImpl extends SeatServiceImplBase {
 		}
 	}
 
-	public Seat findSeatBySeatNo(ServiceContext ctx, BusConnection direction, int seatNum) {
-		Seat mySeat = new Seat();
+	public Seat findSeatBySeatNo(ServiceContext ctx, BusConnection direction, int seatNum) throws Exception {
 		List<Seat> allSeats = direction.getSeats();
 		for (Seat seat : allSeats) {
 			if (seat.getSeatNo() == seatNum) {
-				mySeat = seat;
-				break;
+				return seat;
 			}
 		}
-		return mySeat;
+		throw new Exception("seatNum does not exist");
 	}
 
 	public String reservationKeyGenerator() {
@@ -81,7 +85,15 @@ public class SeatServiceImpl extends SeatServiceImplBase {
 	// Ak je sedadlo Free tak rezervuj rovno bez kontroly kluca
 	// Ak je rezervovane skontroluj kluc, ak sedi kluc, daj do stavu Paid, inac vrat chybu WrongKey
 	public String confirmSeat(ServiceContext ctx, BusConnection direction, int seatNum, String reservationKey) throws WrongKey {
-		Seat mySeat = findSeatBySeatNo(ctx, direction, seatNum);
+
+		Seat mySeat = new Seat();
+		try {
+			mySeat = findSeatBySeatNo(ctx, direction, seatNum);
+		} catch (Exception exception) {
+			System.out.println("There is no seat with this seat number");
+			return "null";
+		}
+
 		String myKey = mySeat.getReservationKey();
 		System.out.println("My reservation key = " + myKey);
 

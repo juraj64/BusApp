@@ -105,12 +105,6 @@ public class SeatServiceTest extends AbstractDbUnitJpaTests implements SeatServi
 		System.out.println("diffInDays: " + diffInDays);
 		System.out.println("diffInMinutes: " + diffInMinutes);
 
-		// Toto nižšie nacitat nechce. Zrejme kvôli formátu v tabuľke SeatServiceTest.xml. Skúšal som aj iné formáty
-		//  pre Date Tue Apr 28 18:13:35 CEST 2020, resp. pre LocalDateTime: 2020-04-28T18:13:35.648,
-		//  ale to zas potom vyhadzuje inú chybu. Zdá sa, že to proste nevie načítať
-//		LocalDateTime ldt1 = LocalDateTime.ofInstant(date1.toInstant(), ZoneId.systemDefault());
-//		System.out.println("LocalDateTime1: " + ldt1);
-
 		// converting java.util.Date to java.time.LocalDateTime.
 		// Toto funguje, lebo načítam aktuálny PC čas a nie čas z testovacej tabuľky
 		Date now = new Date();
@@ -165,7 +159,7 @@ public class SeatServiceTest extends AbstractDbUnitJpaTests implements SeatServi
 			assertNotNull(sr);
 		}
 
-		// reserved seat, negeneruje kluc (pri testovani aktualizovat cas rezervacie, aby bol v limite 10 min.)
+		 //reserved seat, negeneruje kluc (pri testovani aktualizovat cas rezervacie, aby bol v limite 10 min.)
 		BusConnection direction4 = busConnectionService.findById(getServiceContext(), 3L);
 		try {
 			seatService.reserveSeat(getServiceContext(), direction4, 11);

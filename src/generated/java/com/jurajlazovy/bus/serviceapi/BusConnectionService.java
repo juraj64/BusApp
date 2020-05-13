@@ -12,7 +12,8 @@ public interface BusConnectionService {
 
 	public final static String BEAN_ID = "busConnectionService";
 
-	public void makeConnection(ServiceContext ctx, String destination, int minSeats, int durationMinutes);
+	public void makeConnection(ServiceContext ctx, String destination, int minSeats, int startHours, int startMinutes,
+			int durationMinutes);
 
 	public void freeReservedSeats(ServiceContext ctx);
 
