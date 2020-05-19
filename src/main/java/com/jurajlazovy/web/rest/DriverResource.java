@@ -24,7 +24,7 @@ public class DriverResource extends DriverResourceBase {
 	}
 
 	// Doplnena overwritnuta metoda pre vytvorenie noveho drivera, aby zaroven bola schopna nacitat connections
-	// Na základe príkladu zo 140-Github-sculptor-buses. Zatiaľ neviem, či to tu vôbec musí byť.
+	// Bez tejto metody nefunguje input Driver cez curl
 	@RequestMapping(value = "/driver", method = RequestMethod.POST)
 	public String create(@RequestBody Driver entity) {
 		entity.getConnections().forEach(e -> e.setDriver(entity));

@@ -24,8 +24,7 @@ public class BusConnectionResource extends BusConnectionResourceBase {
 	}
 
 	// Doplnena overwritnuta metoda pre vytvorenie novy busConnections, aby zaroven bola schopna nacitat seats
-	// Na základe príkladu zo 140-Github-sculptor-buses. Ale nacitat nic neviem
-	@RequestMapping(value = "/direction", method = RequestMethod.POST)
+	@RequestMapping(value = "/busConnection", method = RequestMethod.POST)
 	public String create(@RequestBody BusConnection entity) {
 		entity.getSeats().forEach(e->e.setDirection(entity));
 		return super.create(entity);
