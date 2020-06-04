@@ -31,16 +31,6 @@ public class SeatServiceTest extends AbstractDbUnitJpaTests implements SeatServi
 	@Autowired
 	protected BusConnectionService busConnectionService;
 
-	@Override
-	public void testReserveSeat() throws Exception {
-
-	}
-
-	@Override
-	public void testConfirmSeat() throws Exception {
-
-	}
-
 	@Test
 	public void testFindById() throws Exception {
 		Seat seat = seatService.findById(getServiceContext(),3L);
@@ -138,7 +128,7 @@ public class SeatServiceTest extends AbstractDbUnitJpaTests implements SeatServi
 	}
 
 	@Test
-	public void reserveSeat() throws Exception {
+	public void testReserveSeat() throws Exception {
 		// free seat, vygeneruje reservation key
 		BusConnection direction1 = busConnectionService.findById(getServiceContext(), 1L);
 		String reservationKey1 = seatService.reserveSeat(getServiceContext(), direction1, 10);
@@ -172,7 +162,7 @@ public class SeatServiceTest extends AbstractDbUnitJpaTests implements SeatServi
 
 
 	@Test
-	public void confirmSeat() throws Exception {
+	public void testConfirmSeat() throws Exception {
 		// free seat, po zaplateni do stavu paid a vrati confirmed
 		BusConnection direction1 = busConnectionService.findById(getServiceContext(), 1L);
 		String result1 = seatService.confirmSeat(getServiceContext(), direction1, 10, "null");

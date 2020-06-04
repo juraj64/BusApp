@@ -86,7 +86,7 @@ public class BusConnectionServiceTest extends AbstractDbUnitJpaTests implements 
 		assertTrue(exception);
 	}
 
-	@Test
+	@Test // musí sa spustiť samostatne, inak vyhodi chybu
 	public void testMakeConnection() throws Exception {
 		List<BusConnection> directionsBefore = busConnectionService.findAll(getServiceContext());
 		assertEquals(3, directionsBefore.size());
