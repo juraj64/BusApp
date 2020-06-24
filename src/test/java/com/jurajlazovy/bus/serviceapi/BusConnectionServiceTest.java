@@ -96,7 +96,7 @@ public class BusConnectionServiceTest extends AbstractDbUnitJpaTests implements 
 		assertEquals(before - 1, countRowsInTable(BusConnection.class));
 	}
 
-	@Test // musí sa spustiť samostatne, inak vyhodi chybu
+	@Test // musí sa spustiť samostatne (nie hromadne s ostatnymi), lebo som predtym deletol
 	public void testMakeConnection() throws Exception {
 		List<BusConnection> directionsBefore = busConnectionService.findAll(getServiceContext());
 		assertEquals(3, directionsBefore.size());
@@ -116,14 +116,16 @@ public class BusConnectionServiceTest extends AbstractDbUnitJpaTests implements 
 		BusConnection connection = busConnectionService.findById(getServiceContext(), 4L);
 		assertEquals("PN-999", connection.getBus().getBusSpz());
 		assertEquals("Juro", connection.getDriver().getName());
+		assertEquals(2L, connection.getDriver().getId().longValue());
 
-		// ale takto spatne to nefunguje, t.j. nepriradi driverovi novu connection. Opytat sa Pala
-		//Driver driver = directionsAfter.get(3).getDriver(); // driver novej connection
-		Driver driver = connection.getDriver();
+		// ale takto spatne to priamo nefunguje, t.j. nepriradi driverovi automaticky novu connection.
+		Driver driver = connection.getDriver(); // driver na zaklade novovytvorenej connection
+		driver.addConnection(connection); // ale musim mu ju manualne pridat
 		assertEquals("Juro", driver.getName());
-		assertEquals(1, driver.getConnections().size()); // ale medzi driver`s connection nie je
-		assertEquals("BB", driver.getConnections().get(0).getDestination()); // len povodne destinacie
-
+		assertEquals(2L, driver.getId().longValue());
+		assertEquals(2, driver.getConnections().size());
+		assertEquals("BB", driver.getConnections().get(0).getDestination()); // povodna connection
+		assertEquals("Trnava", driver.getConnections().get(1).getDestination()); // novo vytvorena
 	}
 
 
