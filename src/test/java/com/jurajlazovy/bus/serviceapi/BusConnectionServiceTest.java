@@ -42,6 +42,7 @@ public class BusConnectionServiceTest extends AbstractDbUnitJpaTests implements 
 
 	@Test
 	public void testSave() throws Exception {
+		int before = countRowsInTable(BusConnection.class);
 		BusConnection direction = new BusConnection();
 		direction.setDestination("ZA");
 		direction.setMinSeats(20);
@@ -67,6 +68,7 @@ public class BusConnectionServiceTest extends AbstractDbUnitJpaTests implements 
 		assertEquals("BB-123", newDirection.getBus().getBusSpz());
 		assertEquals(SeatStatus.Paid, newDirection.getSeats().get(2).getSeatStatus());
 		assertEquals(9, newDirection.getStartHours());
+		assertEquals(before + 1, countRowsInTable(BusConnection.class));
 
 	}
 
@@ -84,6 +86,14 @@ public class BusConnectionServiceTest extends AbstractDbUnitJpaTests implements 
 		}
 
 		assertTrue(exception);
+	}
+
+	@Test
+	public void testSimpleDelete() throws Exception {
+		int before = countRowsInTable(BusConnection.class);
+		BusConnection direction = busConnectionService.findById(getServiceContext(),2L);
+		busConnectionService.delete(getServiceContext(),direction);
+		assertEquals(before - 1, countRowsInTable(BusConnection.class));
 	}
 
 	@Test // musí sa spustiť samostatne, inak vyhodi chybu

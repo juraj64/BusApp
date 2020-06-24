@@ -42,6 +42,7 @@ public class DriverServiceTest extends AbstractDbUnitJpaTests implements DriverS
 
 	@Test
 	public void testSave() throws Exception {
+		int before = countRowsInTable(Driver.class);
 		Driver driver = new Driver();
 		driver.setName("Palo");
 		driver.setAge(48);
@@ -61,6 +62,7 @@ public class DriverServiceTest extends AbstractDbUnitJpaTests implements DriverS
 		assertEquals("Palo", newDriver.getName());
 		assertEquals(48, newDriver.getAge());
 		assertEquals(120, newDriver.getConnections().get(0).getDurationMinutes());
+		assertEquals(before + 1, countRowsInTable(Driver.class));
 
 	}
 
@@ -80,6 +82,14 @@ public class DriverServiceTest extends AbstractDbUnitJpaTests implements DriverS
 		}
 
 		assertTrue(exception);
+	}
+
+	@Test
+	public void testSimpleDelete() throws Exception {
+		int before = countRowsInTable(Driver.class);
+		Driver driver = driverService.findById(getServiceContext(), 4L);
+		driverService.delete(getServiceContext(),driver);
+		assertEquals(before - 1, countRowsInTable(Driver.class));
 	}
 
 }

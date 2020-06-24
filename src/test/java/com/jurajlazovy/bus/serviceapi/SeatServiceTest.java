@@ -128,6 +128,14 @@ public class SeatServiceTest extends AbstractDbUnitJpaTests implements SeatServi
 	}
 
 	@Test
+	public void testSimpleDelete() throws Exception {
+		int before = countRowsInTable(Seat.class);
+		Seat seat = seatService.findById(getServiceContext(),3L);
+		seatService.delete(getServiceContext(),seat);
+		assertEquals(before - 1, countRowsInTable(Seat.class));
+	}
+
+	@Test
 	public void testReserveSeat() throws Exception {
 		// free seat, vygeneruje reservation key
 		BusConnection direction1 = busConnectionService.findById(getServiceContext(), 1L);
