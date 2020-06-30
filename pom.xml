@@ -25,7 +25,7 @@
 		<aspectj-version>1.8.5</aspectj-version>
 		<joda-time-version>2.7</joda-time-version>
 		<jackson-version>2.4.4</jackson-version>
-		<xstream-version>1.4.7</xstream-version>
+		<xstream-version>1.4.10-java7</xstream-version>
 		<junit-version>4.12</junit-version>
 		<hsqldb-version>2.3.2</hsqldb-version>
 	</properties>
