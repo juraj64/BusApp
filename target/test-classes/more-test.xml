@@ -21,4 +21,12 @@
 	<!-- Import more custom beans for test
 		<import resource="classpath:/moreTestBeans.xml"/>
 	-->
+
+	<bean id="testDataSource" class="org.apache.commons.dbcp.BasicDataSource">
+		<property name="driverClassName" value="org.hsqldb.jdbcDriver"/>
+		<property name="url" value="jdbc:hsqldb:mem:busApp"/>
+		<property name="username" value="sa"/>
+		<property name="password" value=""/>
+	</bean>
+
 </beans>

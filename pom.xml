@@ -156,10 +156,12 @@
 		<dependency>
 		    <groupId>org.springframework</groupId>
 		    <artifactId>spring-webmvc</artifactId>
+		    <version>${spring-version}</version>
 		</dependency>
 		<dependency>
 		   <groupId>org.springframework</groupId>
 		   <artifactId>spring-oxm</artifactId>
+                   <version>${spring-version}</version>
 		</dependency>
 		<dependency>
 			<groupId>com.fasterxml.jackson.core</groupId>
@@ -215,10 +217,12 @@
 		<dependency>
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-context</artifactId>
+                        <version>${spring-version}</version>
 		</dependency>
 		<dependency>
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-orm</artifactId>
+                        <version>${spring-version}</version>
 		</dependency>
 		<dependency>
 			<groupId>commons-pool</groupId>
@@ -277,6 +281,7 @@
 		<dependency>
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-test</artifactId>
+                        <version>${spring-version}</version>
 			<scope>test</scope>
 		</dependency>
 		<dependency>
@@ -297,9 +302,9 @@
 		</dependency>
 
 		<dependency>
-			<groupId>mysql</groupId>
-			<artifactId>mysql-connector-java</artifactId>
-			<version>8.0.19</version>
+			<groupId>org.postgresql</groupId>
+			<artifactId>postgresql</artifactId>
+			<version>42.2.8</version>
 		</dependency>
 
 		<!-- Potrebné manuálne doplniť túto dependency kvoli nedostatočnej kompatibilite Javy 11 a Sculptora -->
@@ -307,6 +312,12 @@
 			<groupId>javax.annotation</groupId>
 			<artifactId>javax.annotation-api</artifactId>
 			<version>1.3.1</version>
+		</dependency>
+		<dependency>
+			<groupId>org.sculptorgenerator</groupId>
+			<artifactId>sculptor-framework-test</artifactId>
+			<version>3.2.0-SNAPSHOT</version>
+			<scope>test</scope>
 		</dependency>
 
 

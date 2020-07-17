@@ -5,10 +5,10 @@
 	<Arg>jdbc/BusAppDS</Arg>
 	<Arg>
 		<New class="org.springframework.jdbc.datasource.DriverManagerDataSource">
-		<Set name="DriverClassName">com.mysql.jdbc.Driver</Set>
-		<Set name="Url">jdbc:mysql://localhost/busapp?autoReconnect=true</Set>
+		<Set name="DriverClassName">org.postgresql.Driver</Set>
+		<Set name="Url">jdbc:postgresql://localhost/busapp</Set>
 		<Set name="Username">root</Set>
-		<Set name="Password"></Set>
+		<Set name="Password">root</Set>
 		</New>
 	</Arg>
 </New>
