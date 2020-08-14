@@ -2,6 +2,7 @@ package com.jurajlazovy.bus.serviceapi;
 
 import com.jurajlazovy.bus.domain.BusConnection;
 import com.jurajlazovy.bus.exception.BusConnectionNotFoundException;
+import com.jurajlazovy.bus.exception.NoneFreeBusOrDriver;
 import java.util.List;
 import org.sculptor.framework.context.ServiceContext;
 
@@ -12,8 +13,8 @@ public interface BusConnectionService {
 
 	public final static String BEAN_ID = "busConnectionService";
 
-	public void makeConnection(ServiceContext ctx, String destination, int minSeats, int startHours, int startMinutes,
-			int durationMinutes);
+	public BusConnection makeConnection(ServiceContext ctx, String destination, int minSeats, int startHours, int startMinutes,
+			int durationMinutes) throws NoneFreeBusOrDriver;
 
 	public void freeReservedSeats(ServiceContext ctx);
 

@@ -13,10 +13,10 @@
 		</div>
 		<br/>
 		<div id="busConnection_startHours">
-			<label for="_startHours">StartHours:</label>
-			<div class="box" id="_startHours">${result.startHours}</div>
-		</div>
-		<br/>
+           <label for="_startHours">StartHours:</label>
+           <div class="box" id="_startHours">${result.startHours}</div>
+        </div>
+        <br/>
 		<div id="busConnection_startMinutes">
 			<label for="_startMinutes">StartMinutes:</label>
 			<div class="box" id="_startMinutes">${result.startMinutes}</div>
@@ -27,6 +27,16 @@
 			<div class="box" id="_durationMinutes">${result.durationMinutes}</div>
 		</div>
 		<br/>
+		<div id="busConnection_driverName">
+        	<label for="_driver.name">DriverName:</label>
+        	<div class="box" id="_driver.name">${result.driver.name}</div>
+        </div>
+        <br/>
+        <div id="busConnection_busSpz">
+           	<label for="_bus.id">busSpz:</label>
+          	<div class="box" id="_bus.busSpz">${result.bus.busSpz}</div>
+        </div>
+        <br/>
 	</c:if>
 	<c:if test="${empty result}">No BusConnection found with this id.</c:if>
 </div>

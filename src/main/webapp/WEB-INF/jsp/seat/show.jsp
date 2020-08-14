@@ -16,6 +16,10 @@
 			<label for="_reservationKey">ReservationKey:</label>
 			<div class="box" id="_reservationKey">${result.reservationKey}</div>
 		</div>
+		<div id="seat_destination">
+     		<label for="_direction.destination">Destination:</label>
+     		<div class="box" id="_direction.destination">${result.direction.destination}</div>
+       		</div>
 		<br/>
 	</c:if>
 	<c:if test="${empty result}">No Seat found with this id.</c:if>

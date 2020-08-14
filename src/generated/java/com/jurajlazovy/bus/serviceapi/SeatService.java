@@ -5,9 +5,8 @@ import com.jurajlazovy.bus.domain.Seat;
 import com.jurajlazovy.bus.exception.SeatAlreadyReserved;
 import com.jurajlazovy.bus.exception.SeatNotFoundException;
 import com.jurajlazovy.bus.exception.WrongKey;
-import org.sculptor.framework.context.ServiceContext;
-
 import java.util.List;
+import org.sculptor.framework.context.ServiceContext;
 
 /**
  * Generated interface for the Service SeatService.

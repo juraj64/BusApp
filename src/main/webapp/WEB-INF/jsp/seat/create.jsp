@@ -22,6 +22,12 @@
 		<br/>
 		<form:errors cssClass="errors" id="_reservationKey" path="reservationKey"/>
 	</div>
+	<div id="seat_destination">
+       	<label for="_direction.destination">Destination:</label>
+       	<form:input cssStyle="width:300px" id="_direction.destination" path="direction.destination"/>
+       	<br/>
+       	<form:errors cssClass="errors" id="_direction.destination" path="direction.destination"/>
+    </div>
 	<div class="submit" id="seat_submit">
 		<input id="proceed" type="submit" value="Save"/>
 	</div>

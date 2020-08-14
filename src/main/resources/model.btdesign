@@ -67,13 +67,15 @@ Application BusApp {
             - List<@Seat> seats <-> direction inverse
         }
 
+
         Service BusConnectionService {
         // Najdi volny autobus a najdi volneho vodica tak ze
         // - Autobus nemoze byt na inej linke
         // - Vodic moze robit max 12 hodin potom musi 12 hodin oddychovat
         // - Vodic musi mat oddych od predchadzajuceho spoja minimalne 10 minut
         // - Treba vyrobit aj Seats v pocte Bus.numberOfSeats
-        makeConnection(String destination, int minSeats, int startHours, int startMinutes,  int durationMinutes);
+        BusConnection makeConnection(String destination, int minSeats, int startHours,
+        int startMinutes, int durationMinutes) throws NoneFreeBusOrDriver;
 
         // Prescanuje vsetky sedadla vsetkych autobusov a ak je rezervacia starsia ako 10 minut tak ju zrusi
         freeReservedSeats();

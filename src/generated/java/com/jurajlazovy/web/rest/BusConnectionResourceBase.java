@@ -2,6 +2,7 @@ package com.jurajlazovy.web.rest;
 
 import com.jurajlazovy.bus.domain.BusConnection;
 import com.jurajlazovy.bus.exception.BusConnectionNotFoundException;
+import com.jurajlazovy.bus.exception.DriverNotFoundException;
 import com.jurajlazovy.bus.serviceapi.BusConnectionService;
 import java.io.IOException;
 import java.lang.Exception;
@@ -71,7 +72,7 @@ public abstract class BusConnectionResourceBase {
 	}
 
 	@RequestMapping(value = "/busConnection", method = RequestMethod.POST)
-	public String create(@RequestBody BusConnection entity) {
+	public String create(@RequestBody BusConnection entity)  {
 		BusConnection result = busConnectionService.save(serviceContext(), entity);
 		return String.format("redirect:/rest/busConnection/%s", result.getId());
 	}

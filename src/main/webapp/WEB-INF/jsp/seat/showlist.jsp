@@ -1,7 +1,7 @@
 <jsp:directive.include file="/WEB-INF/jsp/includes.jsp"/>
 <jsp:directive.include file="/WEB-INF/jsp/header.jsp"/>
 <div>
-<a href="<c:url value="/rest/seat/form" />">New Seat</a>
+
 </div>
 <div>
 	<c:if test="${not empty result}">
@@ -11,6 +11,7 @@
 		<th>SeatNo</th>
 		<th>ReservationDate</th>
 		<th>ReservationKey</th>
+		<th>Destination</th>
 		<th/>
 		<th/>
 		</thead>
@@ -28,6 +29,9 @@
 				<td>
 					${each.reservationKey}
 				</td>
+				<td>
+      				${each.direction.destination}
+    			</td>
 				<td>
 					<a href="<c:url value="/rest/seat/${each.id}" />">Show</a>
 				</td>

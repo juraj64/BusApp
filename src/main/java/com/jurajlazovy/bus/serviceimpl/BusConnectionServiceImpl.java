@@ -1,6 +1,8 @@
 package com.jurajlazovy.bus.serviceimpl;
 
 import com.jurajlazovy.bus.domain.*;
+import com.jurajlazovy.bus.exception.NoneFreeBusOrDriver;
+import com.jurajlazovy.bus.exception.SeatAlreadyReserved;
 import org.sculptor.framework.context.ServiceContext;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -32,9 +34,10 @@ public class BusConnectionServiceImpl extends BusConnectionServiceImplBase {
 	// - Vodic moze robit max 12 hodin potom musi 12 hodin oddychovat
 	// - Vodic musi mat oddych od predchadzajuceho spoja minimalne 10 minut
 	// - Treba vyrobit aj Seats v pocte Bus.numberOfSeats
-	public void makeConnection(ServiceContext ctx, String destination, int minSeats,
-							   int startHours, int startMinutes, int durationMinutes) {
+	public BusConnection makeConnection(ServiceContext ctx, String destination, int minSeats, int startHours,
+										int startMinutes, int durationMinutes) throws NoneFreeBusOrDriver {
 		System.out.println("Make new connection for destination " + destination);
+
 		List<BusConnection> allConnections = busConnectionRepository.findAll();
 		// najdenie volneho busu
 		List<Bus> freeBuses = busRepository.findAll(); // vsetky busy
@@ -45,7 +48,7 @@ public class BusConnectionServiceImpl extends BusConnectionServiceImplBase {
 
 		if (freeBuses.isEmpty()) {
 			System.out.println("There is no free bus to make new connection");
-			return;
+			throw new NoneFreeBusOrDriver("None Free Bus");
 		}
 
 		System.out.println("There are " + freeBuses.size() + " non-occupied bus(es).");
@@ -74,7 +77,7 @@ public class BusConnectionServiceImpl extends BusConnectionServiceImplBase {
 
 		if (freeDrivers.isEmpty()) {
 			System.out.println("There is no free driver to make new connection");
-			return;
+			throw new NoneFreeBusOrDriver("None Free Driver");
 		}
 
 		System.out.println("There are " + freeDrivers.size() + " vacant driver(s).");
@@ -102,15 +105,17 @@ public class BusConnectionServiceImpl extends BusConnectionServiceImplBase {
 			seat.setReservationKey("null");
 			connection.addSeat(seat);
 		}
-		BusConnection newConnection = busConnectionRepository.save(connection);
+		busConnectionRepository.save(connection);
 
 		System.out.println("-----------------------");
 		System.out.println("We created new connection ");
 		System.out.println("-----------------------");
-		System.out.println("   Destination: " + newConnection.getDestination());
-		System.out.println("   Driver`s name: " + newConnection.getDriver().getName());
-		System.out.println("   Bus`s ID number: " + newConnection.getBus().getBusSpz());
-		System.out.println("   Number of seats: " + newConnection.getBus().getNumberOfSeats());
+		System.out.println("   Destination: " + connection.getDestination());
+		System.out.println("   Driver`s name: " + connection.getDriver().getName());
+		System.out.println("   Bus`s ID number: " + connection.getBus().getBusSpz());
+		System.out.println("   Number of seats: " + connection.getBus().getNumberOfSeats());
+
+		return connection;
 	}
 
 	// celkovy pocet minut, ktory denne odjazdi konkretny driver
