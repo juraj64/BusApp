@@ -37,10 +37,15 @@ public class BusConnectionServiceImpl extends BusConnectionServiceImplBase {
 	public BusConnection makeConnection(ServiceContext ctx, String destination, int minSeats, int startHours,
 										int startMinutes, int durationMinutes) throws NoneFreeBusOrDriver {
 		System.out.println("Make new connection for destination " + destination);
-
 		List<BusConnection> allConnections = busConnectionRepository.findAll();
+
 		// najdenie volneho busu
 		List<Bus> freeBuses = busRepository.findAll(); // vsetky busy
+
+		// vyradenie busov, ktore nie su dostatocne velke
+		freeBuses.removeIf(smallBus -> smallBus.getNumberOfSeats() < minSeats);
+
+		// vyradenie obsadenych busov
 		for (BusConnection connection : allConnections) {
 			Bus reservedBus = connection.getBus();
 			freeBuses.remove(reservedBus);
@@ -143,8 +148,9 @@ public class BusConnectionServiceImpl extends BusConnectionServiceImplBase {
 					long diffMinutes = TimeUnit.MINUTES.convert(diffMillies, TimeUnit.MILLISECONDS);
 					System.out.println("DiffMinutes = " + diffMinutes); // standardne to tam nemusi byt
 
-					if(diffMinutes > 10) {
+					if(diffMinutes > 1) {
 						connection.getSeats().get(i).setSeatStatus(SeatStatus.Free);
+						connection.getSeats().get(i).setReservationKey("null");
 					}
 				}
 			}

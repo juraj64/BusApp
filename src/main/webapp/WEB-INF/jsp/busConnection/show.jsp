@@ -2,6 +2,11 @@
 <jsp:directive.include file="/WEB-INF/jsp/header.jsp"/>
 <div>
 	<c:if test="${not empty result}">
+		<div id="busConnection_id">
+    		<label for="_id">Id:</label>
+       		<div class="box" id="_id">${result.id}</div>
+        </div>
+        <br/>
 		<div id="busConnection_destination">
 			<label for="_destination">Destination:</label>
 			<div class="box" id="_destination">${result.destination}</div>
@@ -27,14 +32,14 @@
 			<div class="box" id="_durationMinutes">${result.durationMinutes}</div>
 		</div>
 		<br/>
-		<div id="busConnection_driverName">
-        	<label for="_driver.name">DriverName:</label>
-        	<div class="box" id="_driver.name">${result.driver.name}</div>
+		<div id="busConnection_driverId">
+        	<label for="_driver.id">Driver:</label>
+        	<div class="box" id="_driver.id">${result.driver.id}</div>
         </div>
         <br/>
-        <div id="busConnection_busSpz">
-           	<label for="_bus.id">busSpz:</label>
-          	<div class="box" id="_bus.busSpz">${result.bus.busSpz}</div>
+        <div id="busConnection_busId">
+           	<label for="_bus.id">Bus:</label>
+          	<div class="box" id="_bus.id">${result.bus.id}</div>
         </div>
         <br/>
 	</c:if>

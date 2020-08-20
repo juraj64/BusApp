@@ -1,8 +1,8 @@
 <jsp:directive.include file="/WEB-INF/jsp/includes.jsp"/>
 <jsp:directive.include file="/WEB-INF/jsp/header.jsp"/>
 <div>
-	<h2>New Seat</h2>
-	<c:url value="/rest/seat" var="action"/>
+	<h2>ReserveSeat</h2>
+	<c:url value="/rest/seat/reserve" var="action"/>
 	<form:form action="${action}" method="POST" modelAttribute="entity">
 	<div id="seat_seatNo">
 		<label for="_seatNo">SeatNo:</label>
@@ -10,18 +10,12 @@
 		<br/>
 		<form:errors cssClass="errors" id="_seatNo" path="seatNo"/>
 	</div>
-	<div id="seat_seatStatus">
-		<label for="_seatStatus">SeatStatus:</label>
-		<form:input cssStyle="width:300px" id="_seatStatus" path="seatStatus"/>
-		<br/>
-		<form:errors cssClass="errors" id="_seatStatus" path="seatStatus"/>
-	</div>
 	<div id="seat_reservationDate">
-   		<label for="_reservationDate">ReservationDate:</label>
-   		<form:input cssStyle="width:300px" id="_reservationDate" path="reservationDate"/>
-   		<br/>
-   		<form:errors cssClass="errors" id="_reservationDate" path="reservationDate"/>
-   	</div>
+		<label for="_reservationDate">ReservationDate:</label>
+		<form:input cssStyle="width:300px" id="_reservationDate" path="reservationDate"/>
+		<br/>
+		<form:errors cssClass="errors" id="_reservationDate" path="reservationDate"/>
+	</div>
 	<div id="seat_reservationKey">
 		<label for="_reservationKey">ReservationKey:</label>
 		<form:input cssStyle="width:300px" id="_reservationKey" path="reservationKey"/>

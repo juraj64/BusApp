@@ -65,24 +65,23 @@ public class BusConnectionResource extends BusConnectionResourceBase {
                 e.printStackTrace();
             }
         }
-        // Doplnene a rozsirene su tiez show.jsp a showlist.jsp o driverName a busSpz. Umoznuje tak nacitat
-        // busConnection (nie je vsak mozne nacitat driverId a busId, preto je treba pouzit curl prikaz)
+        // Doplnene a rozsirene su tiez show.jsp a showlist.jsp o driverId a busId.
 
         entity.getSeats().forEach(e -> e.setDirection(entity)); // aby sme vedeli nacitat seats
         return super.create(entity);
     }
 
-    // snaha o spustenie metody (spolu s metodou make). Vytvorenie formulara
-    @RequestMapping(value = "/busConnection/form/make", method = RequestMethod.GET)
-    public String makeForm(ModelMap modelMap) {
-        modelMap.addAttribute("entity", new BusConnection());
-        return "busConnection/make";
-    }
-    // spustenie vlastnej metody makeConnection. Funguje pomocou curl prikazu
+    // Vytvorenie formulara pre metodu makeConnection.
+    // Kedze fomular nepouzivam, tak tam tato metoda, ani make.jsp nemusia vobec byt
+//    @RequestMapping(value = "/busConnection/form/make", method = RequestMethod.GET)
+//    public String makeForm(ModelMap modelMap) {
+//        modelMap.addAttribute("entity", new BusConnection());
+//        return "busConnection/make";
+//    }
+    // spustenie metody makeConnection. Funguje pomocou curl prikazu
     @RequestMapping(value = "/busConnection/make", method = RequestMethod.POST)
     public String make(@RequestBody BusConnection entity) throws NoneFreeBusOrDriver {
-        entity.getSeats().forEach(e -> e.setDirection(entity)); // aby sme vedeli nacitat seats
-
+        //entity.getSeats().forEach(e -> e.setDirection(entity)); // aj toto je zbytocne
         String destination = entity.getDestination();
         int minSeats = entity.getMinSeats();
         int startHours = entity.getStartHours();
@@ -92,5 +91,13 @@ public class BusConnectionResource extends BusConnectionResourceBase {
                 startHours, startMinutes, durationMinutes);
 
         return String.format("redirect:/rest/busConnection/%s", result.getId());
+    }
+
+
+    // spustenie vlastnej metody freeReservedSeats. Funguje pomocou curl prikazu
+    @RequestMapping(value = "/busConnection/free", method = RequestMethod.POST)
+    public String free(@RequestBody BusConnection entity) throws NoneFreeBusOrDriver {
+        busConnectionService.freeReservedSeats(serviceContext());
+        return "redirect:/rest/busConnection/%s";
     }
 }

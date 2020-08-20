@@ -1,7 +1,7 @@
 <jsp:directive.include file="/WEB-INF/jsp/includes.jsp"/>
 <jsp:directive.include file="/WEB-INF/jsp/header.jsp"/>
 <div>
-
+<font size="3" color='saddlebrown'>BusConnections</font>
 </div>
 <div>
 	<c:if test="${not empty result}">
@@ -13,8 +13,8 @@
 		<th>StartHours</th>
 		<th>StartMinutes</th>
 		<th>DurationMinutes</th>
-		<th>DriverName</th>
-		<th>BusSpz</th>
+		<th>Driver</th>
+		<th>Bus</th>
 		<th/>
 		<th/>
 		</thead>
@@ -39,10 +39,10 @@
 					${each.durationMinutes}
 				</td>
 				<td>
-				    ${each.driver.name}
+				    ${each.driver.id}
 				</td>
 				<td>
-           		    ${each.bus.busSpz}
+           		    ${each.bus.id}
          		</td>
 				<td>
 					<a href="<c:url value="/rest/busConnection/${each.id}" />">Show</a>

@@ -1,5 +1,5 @@
 #Sculptor created the following 58 files
-#Mon Aug 10 10:41:37 CEST 2020
+#Tue Aug 18 14:25:58 CEST 2020
 src/generated/java/com/jurajlazovy/web/rest/FrontResourceBase.java=d23fef7fa21841264c768b536a1202d1
 src/generated/java/com/jurajlazovy/bus/serviceimpl/BusConnectionServiceImplBase.java=2f5dff5d6d694bf3f0ec5edc9e19f8a1
 src/generated/java/com/jurajlazovy/bus/domain/BusConnectionRepository.java=370826a3edb07af26d5f247588f9bfa9
