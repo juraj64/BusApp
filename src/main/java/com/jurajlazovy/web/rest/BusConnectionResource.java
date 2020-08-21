@@ -73,11 +73,11 @@ public class BusConnectionResource extends BusConnectionResourceBase {
 
     // Vytvorenie formulara pre metodu makeConnection.
     // Kedze fomular nepouzivam, tak tam tato metoda, ani make.jsp nemusia vobec byt
-//    @RequestMapping(value = "/busConnection/form/make", method = RequestMethod.GET)
-//    public String makeForm(ModelMap modelMap) {
-//        modelMap.addAttribute("entity", new BusConnection());
-//        return "busConnection/make";
-//    }
+    @RequestMapping(value = "/busConnection/form/make", method = RequestMethod.GET)
+    public String makeForm(ModelMap modelMap) {
+        modelMap.addAttribute("entity", new BusConnection());
+        return "busConnection/make";
+    }
     // spustenie metody makeConnection. Funguje pomocou curl prikazu
     @RequestMapping(value = "/busConnection/make", method = RequestMethod.POST)
     public String make(@RequestBody BusConnection entity) throws NoneFreeBusOrDriver {

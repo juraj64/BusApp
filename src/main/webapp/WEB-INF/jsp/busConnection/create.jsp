@@ -1,7 +1,7 @@
 <jsp:directive.include file="/WEB-INF/jsp/includes.jsp"/>
 <jsp:directive.include file="/WEB-INF/jsp/header.jsp"/>
 <div>
-	<h2>New BusConnection</h2>
+	<h2>New Connection</h2>
 	<c:url value="/rest/busConnection" var="action"/>
 	<form:form action="${action}" method="POST" modelAttribute="entity">
 	<div id="busConnection_destination">
@@ -34,19 +34,18 @@
 		<br/>
 		<form:errors cssClass="errors" id="_durationMinutes" path="durationMinutes"/>
 	</div>
-	<div id="busConnection_driverName">
-       	<label for="_driver.name">DriverName:</label>
-       	<form:input cssStyle="width:300px" id="_driver.name" path="driver.name"/>
+	<div id="busConnection_driverId">
+      	<label for="_driver.id">Driver:</label>
+       	<form:input cssStyle="width:300px" id="_driver.id" path="driver.id"/>
        	<br/>
-       	<form:errors cssClass="errors" id="_driver.name" path="driver.name"/>
+       	<form:errors cssClass="errors" id="_driver.id" path="driver.id"/>
     </div>
-    <div id="busConnection_busSpz">
-       	<label for="_bus.busSpz">BusSpz:</label>
-       	<form:input cssStyle="width:300px" id="_bus.busSpz" path="bus.busSpz"/>
+    <div id="busConnection_busId">
+       	<label for="_bus.id">Bus:</label>
+       	<form:input cssStyle="width:300px" id="_bus.id" path="bus.id"/>
        	<br/>
-       	<form:errors cssClass="errors" id="_bus.busSpz" path="bus.busSpz"/>
-   </div>
-
+       	<form:errors cssClass="errors" id="_bus.id" path="bus.id"/>
+    </div>
 
 	<div class="submit" id="busConnection_submit">
 		<input id="proceed" type="submit" value="Save"/>

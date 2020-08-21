@@ -56,6 +56,22 @@
 			</tr>
 		</c:forEach>
 	</table>
+
+	<div>
+    <br />
+    <font size="2" color='saddlebrown'>To run makeConnection method - use curl command, e.g.: </font>
+    <br />
+    <font>curl -i -H "Content-Type: application/json" -X POST -d "{\"destination\":\"Karlovka\",\"minSeats\":20, \"startHours\":10, \"startMinutes\":22, \"durationMinutes\":40}" http://localhost:8888/rest/busConnection/make</font>
+
+    <br />
+    <br />
+    <font size="2" color='saddlebrown'>To run freeReservedSeats method - use curl command:</font>
+    <br />
+    <font>curl -i -H "Content-Type: application/json" -X POST -d "{}" http://localhost:8888/rest/busConnection/free</font>
+
+
+    </div>
+
 	</c:if>
 	<c:if test="${empty result}"><p>There are no BusConnections yet.</p></c:if>
 </div>

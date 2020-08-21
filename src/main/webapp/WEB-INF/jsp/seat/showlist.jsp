@@ -2,6 +2,17 @@
 <jsp:directive.include file="/WEB-INF/jsp/header.jsp"/>
 <div>
 <font size="3" color='saddlebrown'>Seats</font>
+<br />
+<br />
+<font size="2" color='saddlebrown'>To run reserveSeat method - use curl command, e.g.: </font>
+<br />
+<font>curl -i -H "Content-Type: application/json" -X POST -d "{\"direction\": {\"id\": 1243}, \"seatNo\": 3}" http://localhost:8888/rest/seat/reserve</font>
+<br />
+<br />
+<font size="2" color='saddlebrown'>To run confirmSeat method - use curl command, e.g.:</font>
+<br />
+<font>curl -i -H "Content-Type: application/json" -X POST -d "{\"direction\": {\"id\": 1243}, \"seatNo\": 3, \"reservationKey\":\"72600855\"}" http://localhost:8888/rest/seat/confirm</font>
+
 </div>
 <div>
 	<c:if test="${not empty result}">

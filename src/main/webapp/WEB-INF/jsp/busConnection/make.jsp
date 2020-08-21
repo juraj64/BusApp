@@ -34,6 +34,7 @@
 		<br/>
 		<form:errors cssClass="errors" id="_durationMinutes" path="durationMinutes"/>
 	</div>
+
 	<div class="submit" id="busConnection_submit">
 		<input id="proceed" type="submit" value="Submit"/>
 	</div>

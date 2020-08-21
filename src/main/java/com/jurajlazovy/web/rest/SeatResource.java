@@ -57,10 +57,10 @@ public class SeatResource extends SeatResourceBase {
 	}
 
 	// Vytvorenie formulara pre metodu reserveSeat.
-	// Kedze fomular nepouzivam, tak tam tato metoda, ani make.jsp nemusia vobec byt
+	// Kedze fomular nepouzivam, tak tam tato metoda, ani reserve.jsp nemusia vobec byt
     @RequestMapping(value = "/seat/form/reserve", method = RequestMethod.GET)
-    public String reserveForm(ModelMap modelMap) {
-        modelMap.addAttribute("entity", new Seat());
+    public String reserveForm(ModelMap modelMap, Seat entity) {
+		modelMap.addAttribute("entity", entity);
         return "seat/reserve";
     }
 

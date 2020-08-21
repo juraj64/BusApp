@@ -90,8 +90,18 @@ public class BusConnectionServiceImpl extends BusConnectionServiceImplBase {
 			System.out.println("   Driver`s name: " + driver.getName());
 		}
 
-		Bus myBus = freeBuses.get(0); // vyberieme prvy dostupny bus. Alternatívne ho vyberie user
-		Driver myDriver = freeDrivers.get(0);  // a drivera (alebo toho, co ma najmenej najazdene)
+		Bus myBus = freeBuses.get(0); // vyberieme prvy dostupny bus
+		//a drivera co ma najmenej najazdene
+		int myDriverOccupation = 1440;
+		Driver myDriver = new Driver();
+
+		for (Driver driver : freeDrivers) {
+			int currentDriverOccupation = driverDailyOccupation(driver);
+			if (currentDriverOccupation < myDriverOccupation) {
+				myDriverOccupation = currentDriverOccupation;
+				myDriver = driver;
+			}
+		}
 
 		Date actualTime = new Date();
 		BusConnection connection = new BusConnection(); // vytvorim new connection
@@ -148,7 +158,7 @@ public class BusConnectionServiceImpl extends BusConnectionServiceImplBase {
 					long diffMinutes = TimeUnit.MINUTES.convert(diffMillies, TimeUnit.MILLISECONDS);
 					System.out.println("DiffMinutes = " + diffMinutes); // standardne to tam nemusi byt
 
-					if(diffMinutes > 1) {
+					if(diffMinutes > 10) {
 						connection.getSeats().get(i).setSeatStatus(SeatStatus.Free);
 						connection.getSeats().get(i).setReservationKey("null");
 					}
