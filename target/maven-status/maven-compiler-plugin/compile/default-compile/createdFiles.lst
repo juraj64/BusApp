@@ -54,3 +54,4 @@ com/jurajlazovy/bus/domain/BusBuilder.class
 com/jurajlazovy/bus/serviceapi/BusConnectionService.class
 com/jurajlazovy/bus/domain/DriverRepository.class
 com/jurajlazovy/bus/domain/DriverBuilder.class
+com/jurajlazovy/bus/serviceimpl/LoginService.class

@@ -5,8 +5,8 @@
 	<style type="text/css" media="screen">   
 	@import url("<c:url value="/stylesheets/main.css"/>");
 	</style>     
-	<title>TITLE</title>	
+	<title>BusApp</title>
 </head>
-<body >	
+<body >
 	<div id="wrap">
 	<div id="main">	
