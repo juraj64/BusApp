@@ -3,6 +3,8 @@ package com.jurajlazovy.bus.serviceimpl;
 import com.jurajlazovy.bus.domain.*;
 import com.jurajlazovy.bus.exception.SeatAlreadyReserved;
 import com.jurajlazovy.bus.exception.WrongKey;
+import org.sculptor.framework.accessapi.ConditionalCriteria;
+import org.sculptor.framework.accessapi.ConditionalCriteriaBuilder;
 import org.sculptor.framework.context.ServiceContext;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -135,6 +137,41 @@ public class SeatServiceImpl extends SeatServiceImplBase {
         int int_key = random.nextInt(max - min) + min;
         return String.valueOf(int_key);
     }
+
+    // Najdi Seats podla zadanych kriterii (alternativa SELECT)
+    public List<Seat> findSeatsByCondition(ServiceContext ctx, int seatNo, String reservationKey) {
+
+        List<ConditionalCriteria> criteria = ConditionalCriteriaBuilder.criteriaFor(Seat.class)
+                .withProperty(SeatProperties.seatNo()).eq(seatNo) // rovna sa zadanemu seatNo
+                .withProperty(SeatProperties.reservationKey()).lessThan(reservationKey) // mensie ako zadane key
+                .withProperty(SeatProperties.seatStatus()).eq(SeatStatus.Paid) // je paid
+                .orderBy(SeatProperties.reservationDate()).build(); // zorad podla reservation date
+
+        return seatRepository.findByCondition(criteria);
+    }
+
+    // Najdi Seats podla zadanych kriterii (alternativa SELECT) - druhy variant
+    // seats, ktore nie su free a zorad ich podla datumu rezervacie zostupne
+    public List<Seat> findSeatsByConditionTwo(ServiceContext ctx) {
+        List<ConditionalCriteria> criteria = ConditionalCriteriaBuilder.criteriaFor(Seat.class)
+                .withProperty(SeatProperties.seatStatus()).in(SeatStatus.Reserved, SeatStatus.Paid)
+                .orderBy(SeatProperties.reservationDate()).descending().build();
+
+        return seatRepository.findByCondition(criteria);
+    }
+
+    // Najdi Seats podla zadanych kriterii (alternativny JOIN SELECT)
+    public List<Seat> findSeatsJoinByCondition(ServiceContext ctx, int seatNo) {
+
+        List<ConditionalCriteria> criteria = ConditionalCriteriaBuilder.criteriaFor(Seat.class)
+                .withProperty(SeatProperties.seatNo()).greaterThanOrEqual(seatNo) // pre s.seatNo vacsie ako
+                .orderBy(SeatProperties.direction().destination()) // zorad podla bc.destination
+                .orderBy(SeatProperties.seatNo()).build(); // a tiez podla s.seatNo
+
+        return seatRepository.findByCondition(criteria);
+    }
+
+
 }
 
 

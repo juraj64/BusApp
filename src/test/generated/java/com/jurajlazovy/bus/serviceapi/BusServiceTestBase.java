@@ -5,6 +5,10 @@ package com.jurajlazovy.bus.serviceapi;
  */
 public interface BusServiceTestBase {
 
+	public void testFindBusesByCondition() throws Exception;
+
+	public void testFindByCondition() throws Exception;
+
 	public void testFindById() throws Exception;
 
 	public void testFindAll() throws Exception;

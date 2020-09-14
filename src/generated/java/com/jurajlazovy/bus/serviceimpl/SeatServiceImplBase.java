@@ -5,6 +5,7 @@ import com.jurajlazovy.bus.domain.SeatRepository;
 import com.jurajlazovy.bus.exception.SeatNotFoundException;
 import com.jurajlazovy.bus.serviceapi.SeatService;
 import java.util.List;
+import org.sculptor.framework.accessapi.ConditionalCriteria;
 import org.sculptor.framework.context.ServiceContext;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -28,6 +29,13 @@ public abstract class SeatServiceImplBase implements SeatService {
 
 	protected SeatRepository getSeatRepository() {
 		return seatRepository;
+	}
+
+	/**
+	 * Delegates to {@link com.jurajlazovy.bus.domain.SeatRepository#findByCondition}
+	 */
+	public List<Seat> findByCondition(ServiceContext ctx, List<ConditionalCriteria> condition) {
+		return seatRepository.findByCondition(condition);
 	}
 
 	/**

@@ -5,7 +5,7 @@
 <title>Login</title>
 </head>
 <body>
-	<p><font size="5" color="saddlebrown">BusApplication version 3.3</font></p>
+	<p><font size="5" color="saddlebrown">BusApplication version 4.0</font></p>
 	<p><font color="red">${errorMessage}</font></p>
 	<form action="front" method="POST">
 		Input Password : <input name="password" type="password" />

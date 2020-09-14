@@ -200,4 +200,24 @@ public class SeatServiceTest extends AbstractDbUnitJpaTests implements SeatServi
 		}
 
 	}
+
+	@Override
+	public void testFindSeatsByCondition() throws Exception {
+
+	}
+
+	@Override
+	public void testFindSeatsByConditionTwo() throws Exception {
+
+	}
+
+	@Override
+	public void testFindSeatsJoinByCondition() throws Exception {
+
+	}
+
+	@Override
+	public void testFindByCondition() throws Exception {
+
+	}
 }

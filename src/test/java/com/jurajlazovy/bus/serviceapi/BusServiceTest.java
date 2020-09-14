@@ -24,6 +24,16 @@ public class BusServiceTest extends AbstractDbUnitJpaTests implements BusService
 	@Autowired
 	protected BusConnectionService busConnectionService;
 
+	@Override
+	public void testFindBusesByCondition() throws Exception {
+
+	}
+
+	@Override
+	public void testFindByCondition() throws Exception {
+
+	}
+
 	@Test
 	public void testFindById() throws Exception {
 		Bus bus = busService.findById(getServiceContext(), 1L);

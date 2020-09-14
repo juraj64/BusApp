@@ -6,6 +6,7 @@ import com.jurajlazovy.bus.exception.SeatAlreadyReserved;
 import com.jurajlazovy.bus.exception.SeatNotFoundException;
 import com.jurajlazovy.bus.exception.WrongKey;
 import java.util.List;
+import org.sculptor.framework.accessapi.ConditionalCriteria;
 import org.sculptor.framework.context.ServiceContext;
 
 /**
@@ -18,6 +19,14 @@ public interface SeatService {
 	public String reserveSeat(ServiceContext ctx, BusConnection direction, int seatNum) throws SeatAlreadyReserved;
 
 	public String confirmSeat(ServiceContext ctx, BusConnection direction, int seatNum, String reservationKey) throws WrongKey;
+
+	public List<Seat> findSeatsByCondition(ServiceContext ctx, int seatNo, String reservationKey);
+
+	public List<Seat> findSeatsByConditionTwo(ServiceContext ctx);
+
+	public List<Seat> findSeatsJoinByCondition(ServiceContext ctx, int seatNo);
+
+	public List<Seat> findByCondition(ServiceContext ctx, List<ConditionalCriteria> condition);
 
 	public Seat findById(ServiceContext ctx, Long id) throws SeatNotFoundException;
 

@@ -9,6 +9,12 @@ public interface BusConnectionServiceTestBase {
 
 	public void testFreeReservedSeats() throws Exception;
 
+	public void testFindBusConnectionsByCondition() throws Exception;
+
+	public void testFindBusConnectionsJoinByCondition() throws Exception;
+
+	public void testFindByCondition() throws Exception;
+
 	public void testFindById() throws Exception;
 
 	public void testFindAll() throws Exception;

@@ -1,9 +1,6 @@
 package com.jurajlazovy.web.rest;
 
-import com.jurajlazovy.bus.domain.Bus;
-import com.jurajlazovy.bus.domain.BusConnection;
-import com.jurajlazovy.bus.domain.Driver;
-import com.jurajlazovy.bus.domain.DriverRepository;
+import com.jurajlazovy.bus.domain.*;
 import com.jurajlazovy.bus.exception.DriverNotFoundException;
 import com.jurajlazovy.bus.exception.NoneFreeBusOrDriver;
 import com.jurajlazovy.bus.serviceapi.BusConnectionService;
@@ -16,6 +13,8 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+
+import java.util.List;
 
 /**
  * Implementation of BusConnectionResource.
@@ -99,5 +98,36 @@ public class BusConnectionResource extends BusConnectionResourceBase {
     public String free(@RequestBody BusConnection entity) throws NoneFreeBusOrDriver {
         busConnectionService.freeReservedSeats(serviceContext());
         return "redirect:/rest/busConnection/%s";
+    }
+
+    // spustenie metody findBusConnectionsByCondition. Dáta pomocou curl prikazu.
+    @RequestMapping(value = "/busconnection/find", method = RequestMethod.POST)
+    public String find(@RequestBody BusConnection entity) {
+        List<BusConnection> result = busConnectionService.findBusConnectionsByCondition(serviceContext());
+        System.out.println("size = " + result.size());
+
+        for(BusConnection connection : result) {
+            System.out.println("Destination = " + connection.getDestination() +
+                    ", start hours = " + connection.getStartHours() +
+                    ", start minutes = " + connection.getStartMinutes());
+        }
+
+        return String.format("redirect:/rest/busconnection/%s", result);
+    }
+
+    // spustenie metody findBusConnectionsJoinByCondition. Dáta pomocou curl prikazu.
+    // ide o join select v Postgrese
+    @RequestMapping(value = "/busconnection/findjoin", method = RequestMethod.POST)
+    public String findjoin(@RequestBody BusConnection entity) {
+        List<BusConnection> result = busConnectionService.findBusConnectionsJoinByCondition(serviceContext());
+        System.out.println("size = " + result.size());
+
+        for(BusConnection connection : result) {
+            System.out.println("Destination = " + connection.getDestination() +
+                    ", driver name = " + connection.getDriver().getName() +
+                    ", bus ECV = " + connection.getBus().getBusSpz());
+        }
+
+        return String.format("redirect:/rest/busconnection/%s", result);
     }
 }

@@ -3,6 +3,9 @@ package com.jurajlazovy.bus.serviceimpl;
 import com.jurajlazovy.bus.domain.*;
 import com.jurajlazovy.bus.exception.NoneFreeBusOrDriver;
 import com.jurajlazovy.bus.exception.SeatAlreadyReserved;
+import com.jurajlazovy.bus.serviceapi.SeatService;
+import org.sculptor.framework.accessapi.ConditionalCriteria;
+import org.sculptor.framework.accessapi.ConditionalCriteriaBuilder;
 import org.sculptor.framework.context.ServiceContext;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -173,6 +176,23 @@ public class BusConnectionServiceImpl extends BusConnectionServiceImplBase {
 						" seatStatus: " + connection.getSeats().get(i).getSeatStatus());
 			}
 		}
+	}
+
+	@Override
+	public List<BusConnection> findBusConnectionsByCondition(ServiceContext ctx) {
+		List<ConditionalCriteria> criteria = ConditionalCriteriaBuilder.criteriaFor(BusConnection.class)
+				.orderBy(BusConnectionProperties.startHours()).build(); // zorad vsetky podla startHours
+
+		return busConnectionRepository.findByCondition(criteria);
+
+	}
+
+	@Override
+	public List<BusConnection> findBusConnectionsJoinByCondition(ServiceContext ctx) {
+		List<ConditionalCriteria> criteria = ConditionalCriteriaBuilder.criteriaFor(BusConnection.class)
+				.orderBy(BusConnectionProperties.destination()).build(); // zorad vsetky podla destination
+
+		return busConnectionRepository.findByCondition(criteria);
 	}
 
 }

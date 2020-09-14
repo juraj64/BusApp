@@ -5,6 +5,12 @@ package com.jurajlazovy.bus.serviceapi;
  */
 public interface DriverServiceTestBase {
 
+	public void testFindDriversByCondition() throws Exception;
+
+	public void testFindDriversByConditionTwo() throws Exception;
+
+	public void testFindByCondition() throws Exception;
+
 	public void testFindById() throws Exception;
 
 	public void testFindAll() throws Exception;

@@ -25,6 +25,7 @@ com/jurajlazovy/bus/repositoryimpl/BusConnectionRepositoryImpl.class
 com/jurajlazovy/bus/serviceimpl/DriverServiceImpl.class
 com/jurajlazovy/bus/exception/BusConnectionNotFoundException.class
 com/jurajlazovy/bus/serviceimpl/SeatServiceImpl.class
+com/jurajlazovy/bus/serviceimpl/DriverServiceImplBase.class
 com/jurajlazovy/bus/domain/DriverProperties$DriverProperty.class
 com/jurajlazovy/bus/exception/SeatNotFoundException.class
 com/jurajlazovy/web/rest/BusResourceBase.class
@@ -53,5 +54,6 @@ com/jurajlazovy/bus/domain/BusProperties$BusPropertiesImpl.class
 com/jurajlazovy/bus/domain/BusBuilder.class
 com/jurajlazovy/bus/serviceapi/BusConnectionService.class
 com/jurajlazovy/bus/domain/DriverRepository.class
+com/jurajlazovy/bus/serviceimpl/BusServiceImplBase.class
 com/jurajlazovy/bus/domain/DriverBuilder.class
 com/jurajlazovy/bus/serviceimpl/LoginService.class

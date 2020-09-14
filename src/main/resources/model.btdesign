@@ -32,6 +32,10 @@ Application BusApp {
             String name
             int age
             -List<@BusConnection> connections <-> driver inverse;
+
+            Repository DriverRepository {
+                findByCondition;
+            }
          }
 
         Entity Bus {
@@ -39,6 +43,10 @@ Application BusApp {
             int busNum; // verzia bez key
             String busSpz;
             int numberOfSeats;
+
+            Repository BusRepository {
+                findByCondition;
+            }
         }
 
 
@@ -49,6 +57,10 @@ Application BusApp {
             Timestamp reservationDate;
             String reservationKey;
             -@BusConnection direction <-> seats cascade="persist,merge";
+
+            Repository SeatRepository {
+                 findByCondition;
+            }
         }
 
         enum SeatStatus {
@@ -57,14 +69,18 @@ Application BusApp {
 
         Entity BusConnection {
             scaffold
-            String destination
-            int minSeats
-            int startHours
-            int startMinutes
-            int durationMinutes
-            - @Driver driver <-> connections cascade="persist,merge"
-            - @Bus bus
-            - List<@Seat> seats <-> direction inverse
+            String destination;
+            int minSeats;
+            int startHours;
+            int startMinutes;
+            int durationMinutes;
+            - @Driver driver <-> connections cascade="persist,merge";
+            - @Bus bus;
+            - List<@Seat> seats <-> direction inverse;
+
+            Repository BusConnectionRepository {
+                findByCondition;
+            }
         }
 
 
@@ -74,23 +90,47 @@ Application BusApp {
         // - Vodic moze robit max 12 hodin potom musi 12 hodin oddychovat
         // - Vodic musi mat oddych od predchadzajuceho spoja minimalne 10 minut
         // - Treba vyrobit aj Seats v pocte Bus.numberOfSeats
-        BusConnection makeConnection(String destination, int minSeats, int startHours,
+        @BusConnection makeConnection(String destination, int minSeats, int startHours,
         int startMinutes, int durationMinutes) throws NoneFreeBusOrDriver;
 
         // Prescanuje vsetky sedadla vsetkych autobusov a ak je rezervacia starsia ako 10 minut tak ju zrusi
         freeReservedSeats();
+
+        // Najdi BusConnections podla zadanych kriterii (alternativa SELECT)
+        List<@BusConnection> findBusConnectionsByCondition();
+        List<@BusConnection> findBusConnectionsJoinByCondition(); // SELECT join prikaz
+        findByCondition => BusConnectionRepository.findByCondition; // toto tam musi byt kvoli tejto service
         }
 
         Service SeatService {
         // Rezervuj sedadlo, ak je obsadene (Paid) alebo bolo rezervovane pred menej ako 10 minutami vyhod exception SeatAlreadyReserved
         // To znamena ak je sice rezervovane ale dlhsie ako 10 minut vygeneruj novy kluc a urob novu rezervaciu
         // Ak je mozne rezervovat sedadlo vygeneruj 8 miestne cislo ktore nemoze zacinat 0 a vrat ako navratovu hodnotu - key
-        String reserveSeat(BusConnection direction, int seatNum) throws SeatAlreadyReserved;
+        String reserveSeat(@BusConnection direction, int seatNum) throws SeatAlreadyReserved;
 
         // Potvrd rezervaciu po zaplateni
         // Ak je sedadlo Free tak rezervuj rovno bez kontroly kluca
         // Ak je rezervovane skontroluj kluc, ak sedi kluc daj do stavu Paid inac vrat chybu WrongKey
-        String confirmSeat(BusConnection direction, int seatNum, String reservationKey) throws WrongKey;
+        String confirmSeat(@BusConnection direction, int seatNum, String reservationKey) throws WrongKey;
+
+        // Najdi Seats podla zadanych kriterii (alternativa SELECT)
+        List<@Seat> findSeatsByCondition(int seatNo, String reservationKey);
+        List<@Seat> findSeatsByConditionTwo(); // Alternativny select
+        List<@Seat> findSeatsJoinByCondition(int seatNo); // SELECT join prikaz
+        findByCondition => SeatRepository.findByCondition; // toto tam musi byt kvoli tejto service
         }
+
+        Service DriverService {
+        List<@Driver> findDriversByCondition(); // Najdi driverov podla zadanych kriterii (alternativa SELECT)
+        List<@Driver> findDriversByConditionTwo(int age); // Alternativny select
+        findByCondition => DriverRepository.findByCondition; // toto tam musi byt kvoli tejto service
+        }
+
+        Service BusService {
+        List<@Bus> findBusesByCondition(int numberOfSeats); // Najdi Buses podla zadanych kriterii (alternativa SELECT)
+        findByCondition => BusRepository.findByCondition; // toto tam musi byt kvoli tejto service
+        }
+
+
     }
 }

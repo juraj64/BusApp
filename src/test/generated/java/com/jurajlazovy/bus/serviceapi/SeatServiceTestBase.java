@@ -9,6 +9,14 @@ public interface SeatServiceTestBase {
 
 	public void testConfirmSeat() throws Exception;
 
+	public void testFindSeatsByCondition() throws Exception;
+
+	public void testFindSeatsByConditionTwo() throws Exception;
+
+	public void testFindSeatsJoinByCondition() throws Exception;
+
+	public void testFindByCondition() throws Exception;
+
 	public void testFindById() throws Exception;
 
 	public void testFindAll() throws Exception;

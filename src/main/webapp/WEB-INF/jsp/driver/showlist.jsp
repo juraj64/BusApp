@@ -2,6 +2,9 @@
 <jsp:directive.include file="/WEB-INF/jsp/header.jsp"/>
 <div>
 <a href="<c:url value="/rest/driver/form" />">New Driver</a>
+<br />
+<br />
+<a href="<c:url value="/rest/driver/form/find" />">Find Drivers</a>
 </div>
 <div>
 	<c:if test="${not empty result}">

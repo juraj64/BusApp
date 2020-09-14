@@ -149,4 +149,20 @@ public class BusConnectionServiceTest extends AbstractDbUnitJpaTests implements 
 
 	}
 
+	@Override
+	public void testFindBusConnectionsByCondition() throws Exception {
+
+	}
+
+	@Override
+	public void testFindBusConnectionsJoinByCondition() throws Exception {
+
+	}
+
+
+	@Override
+	public void testFindByCondition() throws Exception {
+
+	}
+
 }

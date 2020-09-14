@@ -6,12 +6,15 @@ import com.jurajlazovy.bus.exception.SeatNotFoundException;
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import org.sculptor.framework.accessapi.ConditionalCriteria;
 import org.sculptor.framework.accessapi.DeleteAccess;
 import org.sculptor.framework.accessapi.FindAllAccess2;
+import org.sculptor.framework.accessapi.FindByConditionAccess2;
 import org.sculptor.framework.accessapi.FindByIdAccess;
 import org.sculptor.framework.accessapi.SaveAccess;
 import org.sculptor.framework.accessimpl.jpa.JpaDeleteAccessImpl;
 import org.sculptor.framework.accessimpl.jpa.JpaFindAllAccessImplGeneric;
+import org.sculptor.framework.accessimpl.jpa.JpaFindByConditionAccessImplGeneric;
 import org.sculptor.framework.accessimpl.jpa.JpaFindByIdAccessImpl;
 import org.sculptor.framework.accessimpl.jpa.JpaSaveAccessImpl;
 import org.springframework.stereotype.Repository;
@@ -23,6 +26,22 @@ import org.springframework.stereotype.Repository;
 public class SeatRepositoryImpl implements SeatRepository {
 
 	public SeatRepositoryImpl() {
+	}
+
+	/**
+	 * Delegates to {@link org.sculptor.framework.accessapi.FindByConditionAccess}
+	 */
+	public List<Seat> findByCondition(List<ConditionalCriteria> condition) {
+		return findByCondition(condition, getPersistentClass());
+	}
+
+	public <R> List<R> findByCondition(List<ConditionalCriteria> condition, Class<R> resultType) {
+
+		FindByConditionAccess2<R> ao = createFindByConditionAccess(resultType);
+
+		ao.setCondition(condition);
+		ao.execute();
+		return ao.getResult();
 	}
 
 	/**
@@ -91,6 +110,22 @@ public class SeatRepositoryImpl implements SeatRepository {
 
 	protected EntityManager getEntityManager() {
 		return entityManager;
+	}
+
+	// convenience method
+	protected FindByConditionAccess2<Seat> createFindByConditionAccess() {
+		return createFindByConditionAccess(getPersistentClass(), getPersistentClass());
+	}
+
+	// convenience method
+	protected <R> FindByConditionAccess2<R> createFindByConditionAccess(Class<R> resultType) {
+		return createFindByConditionAccess(getPersistentClass(), resultType);
+	}
+
+	protected <T, R> FindByConditionAccess2<R> createFindByConditionAccess(Class<T> type, Class<R> resultType) {
+		JpaFindByConditionAccessImplGeneric<T, R> ao = new JpaFindByConditionAccessImplGeneric<T, R>(type, resultType);
+		ao.setEntityManager(getEntityManager());
+		return ao;
 	}
 
 	protected FindByIdAccess<Seat, Long> createFindByIdAccess() {

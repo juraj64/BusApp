@@ -4,6 +4,7 @@ import com.jurajlazovy.bus.domain.BusConnection;
 import com.jurajlazovy.bus.exception.BusConnectionNotFoundException;
 import com.jurajlazovy.bus.exception.NoneFreeBusOrDriver;
 import java.util.List;
+import org.sculptor.framework.accessapi.ConditionalCriteria;
 import org.sculptor.framework.context.ServiceContext;
 
 /**
@@ -17,6 +18,12 @@ public interface BusConnectionService {
 			int durationMinutes) throws NoneFreeBusOrDriver;
 
 	public void freeReservedSeats(ServiceContext ctx);
+
+	public List<BusConnection> findBusConnectionsByCondition(ServiceContext ctx);
+
+	public List<BusConnection> findBusConnectionsJoinByCondition(ServiceContext ctx);
+
+	public List<BusConnection> findByCondition(ServiceContext ctx, List<ConditionalCriteria> condition);
 
 	public BusConnection findById(ServiceContext ctx, Long id) throws BusConnectionNotFoundException;
 

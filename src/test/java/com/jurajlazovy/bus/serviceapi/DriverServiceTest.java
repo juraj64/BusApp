@@ -26,6 +26,21 @@ public class DriverServiceTest extends AbstractDbUnitJpaTests implements DriverS
 	@Autowired
 	protected BusConnectionService busConnectionService;
 
+	@Override
+	public void testFindDriversByCondition() throws Exception {
+
+	}
+
+	@Override
+	public void testFindDriversByConditionTwo() throws Exception {
+
+	}
+
+	@Override
+	public void testFindByCondition() throws Exception {
+
+	}
+
 	@Test
 	public void testFindById() throws Exception {
 		Driver driver = driverService.findById(getServiceContext(), 1L);
