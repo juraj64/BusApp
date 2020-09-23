@@ -5,7 +5,7 @@
 	<c:url value="/rest/driver/find" var="action"/>
 	<form:form action="${action}" method="POST" modelAttribute="entity">
 
-	<div class="submit" id="seat_submit">
+	<div class="submit" id="driver_submit">
 		<input id="proceed" type="submit" value="Save"/>
 	</div>
 	</form:form>
